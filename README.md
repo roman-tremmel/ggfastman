@@ -27,7 +27,7 @@ As an example you can load some data which is included in the package and run fo
 
 ```{r,cache=TRUE}
 data(cad_gwas)
-cad_gwas$y=-log10(cad_gwas$pval)
+cad_gwas$y <- -log10(cad_gwas$pval)
 head(cad_gwas)
 ```
 
@@ -37,7 +37,7 @@ Important is that the data has the three columns which are required:
 2. `pos`
 3. `y`
 
-while the `chrom` has to be the format `c("chr1", "chr2", "chr3", ...)`, the numeric base pair positions in `pos` and the y column contains the pvalues. Here we `-log10`-transform the pvalues. 
+while the `chrom` has to be the format `c("chr1", "chr2", "chr3", ...)`, the `pos` column must be a numeric vector reflecting base pair positions and the `y` column contains the pvalues. Here we `-log10`-transform the pvalues. 
 
 
 We can plot the manhatten figure similar to the original `manhatten` function, but we have to specify the speed option with the "slow" parameter. 
