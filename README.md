@@ -10,7 +10,7 @@ This package `FASTGWASMAN` is trying to fill this gap.
 
 # Installation
 
-So far the package is not on Cran and is tested on Windows and MacOS, thus you need to: 
+So far the package is tested on Windows and MacOS, but is not on Cran, thus you need to: 
 
 
     devtools::install_github("roman-tremmel/FASTGWASMAN")
