@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 I needed a very fast and easy-to-individualize plotting function for GWAS results. Since I'm using ggplot2 a lot, I forked a very nice [project](https://github.com/boxiangliu/manhattan) from boxiangliu and added the super fast plotting approach from the [scattermore project](https://github.com/exaexa/scattermore).  
 A manhattan plot displays pvalues chromosomal positions against -mostly -log10 values- of genome-wide association studies between single nucleotide variants (SNV) or polymorphisms (SNP) and an endpoint e.g. expression, enzyme activity or case-control data. 
@@ -8,7 +8,7 @@ One of the first R packages was [qqman](https://github.com/stephenturner/qqman) 
 This package `FASTGWASMAN` is trying to fill this gap. 
 
 
-## Installation
+# Installation
 
 So far the package is not on Cran and is tested on Windows and MacOS, thus you need to: 
 
@@ -19,9 +19,9 @@ The package is depending on the additional packages `ggplot2` and `scattermore`.
 
     devtools::install_github('exaexa/scattermore', dependencies = F, force = T)
     
-## Usage
+# Usage
 
-# The normal one
+## The normal one
 
 As an example you can load some data which is included in the package and run following code. More information of the data set is provided [here](https://github.com/boxiangliu/manhattan).
 
@@ -46,7 +46,7 @@ We can plot the manhatten figure similar to the original `manhatten` function, b
 FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "slow")
 ```
 
-# The fast way
+## The fast way
 
 Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function and calling the manhatten function using the `"fast"` option. 
 
@@ -62,7 +62,7 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", pointsize = 3, pi
 ```
 
 
-# The insane way
+## The insane way
 
 The fastest option is `speed = "ultrafast"`. The fastest way costs that the data is plotted only in pure black. But I think it is it worth. 
 
@@ -79,18 +79,18 @@ FASTGWASMAN::manhattan(big_cad_gwas, build='hg18', speed = "slow")
 
 ```
 
-# Individualization 
+## Individualization 
 
 Of course you can individualize the plot using standard ggplot2 functions.
 
-- other sales
+- other scales
 
 ```{r}
 FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", y_scale = F) +
   ylim(2, 10)
 ```
 
-Of note, set `y_scale = F` to avoid the error of a second y scale present.
+Of note, set `y_scale = F` to avoid the error of a present second y-scale.
 
 
 - add significance line(s)
@@ -104,8 +104,8 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", 
 ```
 ![Resulting manhatten plot](plots/GWAS_plot_ind.png)
 
-## Questions and Bugs
-This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/boxiangliu/manhattan/issues). 
+# Questions and Bugs
+This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
 
 
 
