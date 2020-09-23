@@ -1,0 +1,14 @@
+Package: FASTGWASMAN
+Type: Package
+Title: FASTGWASMAN: ggplot2-based manhattenplots in fast and ultrafast
+Version: 0.1
+Author: Roman Tremmel
+Maintainer: Roman Tremmel <roman.tremmel@gmail.com>
+Description: A function to generate manhattenplots for GWAS data in a very fast way. This package is based on ideas from here and here.
+License: What license is it under?
+URL:
+BugReports: to me
+Depends: R (>= 3.0.0)
+Imports: ggplot2 (>= 2.2.1), scattermore
+Encoding: UTF-8
+RoxygenNote: 7.1.1.9000
