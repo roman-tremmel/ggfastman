@@ -29,7 +29,7 @@ As an example you can load some data which is included in the package and run fo
 data(cad_gwas)
 cad_gwas$y=-log10(cad_gwas$pval)
 head(cad_gwas)
-´´´
+```
 
 Important is that the data has the three columns which are required: 
 
