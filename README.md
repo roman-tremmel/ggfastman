@@ -108,7 +108,8 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", 
             aes(label=rsid), color =1) # add top rsid
 ```
 
-![Resulting manhatten plot](plots/GWAS_plot_ind.png)
+![Resulting manhatten plot](plot/GWAS_plot_ind.png)
+
 
 # Questions and Bugs
 This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
