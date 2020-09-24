@@ -108,6 +108,11 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", 
 # Questions and Bugs
 This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
 
+## To do
+
+- qq-plots
+- improved manuals
+- improved and cleaner code
 
 
 
