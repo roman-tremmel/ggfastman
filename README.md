@@ -54,7 +54,7 @@ Depending on your system this takes a while, particularly when plotting pvalues 
 ```{r}
 FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast")
 ```
-Zooooom, that was fast, right? How does it work? For the explanation I want to refer to the `scattermore` package. Only so much, the speed is reached with some C code and rasterization.
+Zooooom, that was fast, right? How does it work? For the explanation I want to refer to the `scattermore` package. Only so much, the speed is reached with some C code, rasterization and some magic.
 
 Of course you can increase the point size and the resolution by loosing some of the speed. 
 
