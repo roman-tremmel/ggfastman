@@ -107,6 +107,7 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", 
                filter(y>= -log10(5e-08)), # filter for significant ones 
             aes(label=rsid), color =1) # add top rsid
 ```
+
 ![Resulting manhatten plot](plots/GWAS_plot_ind.png)
 
 # Questions and Bugs
