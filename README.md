@@ -26,7 +26,8 @@ The package is depending on the additional packages `ggplot2` and `scattermore`.
 
 As an example you can load some data which is included in the package and run following code. More information of the data set is provided [here](https://github.com/boxiangliu/manhattan).
 
-```{r,cache=TRUE}
+```{r}
+library(FASTGWASMAN)
 data(cad_gwas)
 cad_gwas$y <- -log10(cad_gwas$pval)
 head(cad_gwas)
