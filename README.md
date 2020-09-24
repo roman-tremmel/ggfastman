@@ -94,7 +94,7 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", y_scale = F) +
 Of note, set `y_scale = F` to avoid the error of a present second y-scale.
 
 
-- add significance line(s)
+- add significance line(s) and snp annotation
 
 ```{r}
 library(tidyverse)
