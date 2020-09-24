@@ -1,7 +1,0 @@
-{
-    "installOptions": {
-        "installFromRepository": true,
-        "libraryPath": "C:/Users/tremmel/Documents/R/R-4.0.2/library",
-        "installDependencies": true
-    }
-}
