@@ -101,7 +101,11 @@ library(tidyverse)
 FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
   geom_hline(yintercept = -log10(5e-08), linetype =2, color ="darkgrey") + # genomewide significance line
   geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey")  + # suggestive significance line
-  geom_text(data = . %>% filter(pval == min(pval)), aes(label=rsid), color =1) # add top rsid
+  geom_text(data = . %>% group_by(chrom) %>% 
+                             top_n(1, y) %>% # extract highest y values
+                                slice(1) %>% # if there are ties, choose the first one
+               filter(y>= -log10(5e-08)), # filter for significant ones 
+            aes(label=rsid), color =1) # add top rsid
 ```
 ![Resulting manhatten plot](plots/GWAS_plot_ind.png)
 
