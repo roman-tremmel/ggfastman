@@ -10,6 +10,7 @@ manhattan(
   color1 = "black",
   color2 = "grey",
   y_scale = TRUE,
+  log10p = TRUE,
   speed = c("slow", "fast", "ultrafast"),
   pointsize = 0,
   pixels = c(512, 512),
@@ -17,16 +18,26 @@ manhattan(
 )
 }
 \arguments{
-\item{gwas}{A GWAS study. Must have chrom, pos, and a y column reflecting -log10 pvalues}
+\item{gwas}{A data.frame. Columns "chr", "pos", and "pvalue" are required}
 
-\item{build}{Genomic build. Currently supports hg18, hg19, and hg38}
+\item{build}{Genomic build. Currently hg18, hg19, and hg38 are supported}
 
 \item{color1}{Color for odd-numbered chromosomes}
 
 \item{color2}{Color for even-numbered chromosomes}
+
+\item{y_scale}{When an own y-scale is provided then set this to TRUE to avoid an error.}
+
+\item{log10p}{If TRUE (default), the -log10 transformed pvalues are plotted}
+
+\item{speed}{The speed option. Fast and ultrafast use scattermore functionality}
+
+\item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. Please be sure what you are doing, since points can be lost.}
+
+\item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). Please be sure what you are doing, since points can be lost.}
 }
 \value{
-Ta ggplot object that makes a Manhattan plot.
+A ggplot object that makes a Manhattan plot.
 }
 \description{
 Add together two numbers

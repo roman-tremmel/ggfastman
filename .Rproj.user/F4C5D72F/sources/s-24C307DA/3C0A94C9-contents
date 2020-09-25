@@ -7,8 +7,8 @@
 #' @param y_scale When an own y-scale is provided then set this to TRUE to avoid an error. 
 #' @param log10p If TRUE (default), the -log10 transformed pvalues are plotted
 #' @param speed The speed option. Fast and ultrafast use scattermore functionality
-#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. Please be sure what you are doing, since points can be lost. 
-#' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). Please be sure what you are doing, since points can be lost. 
+#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0.
+#' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).
 #' @return A ggplot object that makes a Manhattan plot.
 #' @export
 #' @examples
