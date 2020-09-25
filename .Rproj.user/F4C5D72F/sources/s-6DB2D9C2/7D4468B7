@@ -1,24 +1,24 @@
 {
-    "id": "7F596FBE",
+    "id": "7D4468B7",
     "path": "C:/Users/tremmel/Desktop/FASTGWASMAN/R/manhattan.R",
     "project_path": "R/manhattan.R",
     "type": "r_source",
-    "hash": "2967623372",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1601025703730.0,
+    "created": 1601033288282.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 6,
     "properties": {
-        "cursorPosition": "9,225",
-        "scrollLine": "0"
+        "cursorPosition": "52,0",
+        "scrollLine": "34"
     },
     "folds": "",
-    "lastKnownWriteTime": 1601033066,
+    "lastKnownWriteTime": 1601033293,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1601033066407,
+    "last_content_update": 1601033293022,
     "read_only": false,
     "read_only_alternatives": []
 }

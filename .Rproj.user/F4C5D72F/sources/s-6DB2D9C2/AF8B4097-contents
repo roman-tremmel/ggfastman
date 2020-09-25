@@ -1,3 +1,4 @@
+devtools::install_github("roman-tremmel/FASTGWASMAN")
 library(FASTGWASMAN)
 data("gwas_data")
 head(gwas_data)
@@ -19,10 +20,16 @@ ggsave("c:/Users/tremmel/Desktop/test.pdf")
 # save(gwas_data, file = "data/gwas_data.rda")
 devtools::document()
 devtools::install(upgrade = "never")
-devtools::install_github("roman-tremmel/FASTGWASMAN")
 
 
-
+manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
+  geom_hline(yintercept = -log10(5e-08), linetype =2, color ="darkgrey") + # genomewide significance line
+  geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey")  + # suggestive significance line
+  ggrepel::geom_text_repel(data = . %>% group_by(chrom) %>% # ggrepel to avoid overplotting
+                             top_n(1, y) %>% # extract highest y values
+                             slice(1) %>% # if there are ties, choose the first one
+                             filter(y>= -log10(5e-08)), # filter for significant ones 
+                           aes(label=rsid), color =1) # add top rsid
 
 # # code to show problem of lost points
 # devtools::install_github("roman-tremmel/FASTGWASMAN")
