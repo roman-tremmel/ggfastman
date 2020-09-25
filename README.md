@@ -87,7 +87,7 @@ Of course you can individualize the plot using standard ggplot2 functions.
 - other scales
 
 ```{r}
-FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", y_scale = F) +
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast", y_scale = F) +
   ylim(2, 10)
 ```
 
@@ -99,7 +99,7 @@ Of note, set `y_scale = F` to avoid the error of a present second y-scale.
 ```{r}
 library(tidyverse)
 library(ggrepel)
-FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
   geom_hline(yintercept = -log10(5e-08), linetype =2, color ="darkgrey") + # genomewide significance line
   geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey")  + # suggestive significance line
   ggrepel::geom_text_repel(data = . %>% group_by(chrom) %>% # ggrepel to avoid overplotting
