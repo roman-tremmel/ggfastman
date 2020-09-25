@@ -53,6 +53,8 @@ Depending on your system this takes a while, particularly when plotting pvalues 
 
 ```{r}
 FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast")
+#or
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "f")
 ```
 Zooooom, that was fast, right? How does it work? For the explanation I want to refer to the `scattermore` package. Only so much, the speed is reached with some C code, rasterization and some magic.
 
