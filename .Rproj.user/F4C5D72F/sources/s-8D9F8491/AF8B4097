@@ -1,25 +1,25 @@
 {
     "id": "AF8B4097",
-    "path": null,
-    "project_path": null,
+    "path": "C:/Users/tremmel/Desktop/FASTGWASMAN/debug.R",
+    "project_path": "debug.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "1367509957",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1601024695540.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "6,0",
-        "scrollLine": "0"
+        "cursorPosition": "21,0",
+        "scrollLine": "4"
     },
     "folds": "",
-    "lastKnownWriteTime": 949429446720163196,
-    "encoding": "",
+    "lastKnownWriteTime": 1601033097,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1601026130740,
+    "last_content_update": 1601033097572,
     "read_only": false,
     "read_only_alternatives": []
 }

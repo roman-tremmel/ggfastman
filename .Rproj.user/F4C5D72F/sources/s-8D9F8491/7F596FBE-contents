@@ -7,8 +7,8 @@
 #' @param y_scale When an own y-scale is provided then set this to TRUE to avoid an error. 
 #' @param log10p If TRUE (default), the -log10 transformed pvalues are plotted
 #' @param speed The speed option. Fast and ultrafast use scattermore functionality
-#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0.
-#' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).
+#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.  it
+#' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). 
 #' @return A ggplot object that makes a Manhattan plot.
 #' @export
 #' @examples
@@ -16,7 +16,7 @@
 #' cad_gwas$y=-log10(cad_gwas$pval)
 #' manhattan(cad_gwas,build='hg18')
 
-manhattan=function(gwas, build=c('hg18','hg19','hg38'), color1='black', color2='grey', y_scale = TRUE,log10p=TRUE,
+manhattan=function(gwas, build=c('hg18','hg19','hg38'), color1='black', color2='grey', y_scale = TRUE,log10p=TRUE,alpha = 1,
                    speed = c("slow", "fast", "ultrafast"),
                    pointsize=0, pixels=c(512, 512), ...){
   data=gwas
@@ -61,10 +61,10 @@ manhattan=function(gwas, build=c('hg18','hg19','hg38'), color1='black', color2='
 
 
 
-  plot <- ggplot2::ggplot(data, ggplot2::aes(x=cumulative_pos,y=y,color=color))
+  plot <- ggplot2::ggplot(data, ggplot2::aes(x=cumulative_pos,y=y,color=color,shape=shape))
   plot <- switch(speed,
-         slow = plot + ggplot2::geom_point(),
-         fast  = plot + scattermore::geom_scattermore(pointsize=pointsize, pixels=pixels,shape=16),
+         slow = plot + ggplot2::geom_point(alpha =alpha),
+         fast  = plot + scattermore::geom_scattermore(pointsize=pointsize, pixels=pixels, alpha = alpha),
          ultrafast = ggplot2::ggplot() + scattermore::geom_scattermost(data[, c("cumulative_pos", "y")])
          )
 
@@ -74,5 +74,7 @@ manhattan=function(gwas, build=c('hg18','hg19','hg38'), color1='black', color2='
     plot + ggplot2::theme_classic()+
       ggplot2::scale_x_continuous(limits=c(0,xmax),expand=c(0.01,0),breaks=x_breaks,
                                   labels=names(x_breaks),name='Chromosome')+
-      ggplot2::scale_color_manual(values=color_map,guide='none'))
+      ggplot2::scale_color_manual(values=color_map,guide='none')+
+      ggplot2::scale_shape_identity() 
+    )
 }

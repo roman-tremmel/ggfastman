@@ -1,0 +1,23 @@
+{
+    "id": "F71A9AC9",
+    "path": null,
+    "project_path": null,
+    "type": "r_code_browser",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1601027479739.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "context": "package:scattermore:::geom_scattermore"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 4428002041703002144,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1601027479739,
+    "read_only": false,
+    "read_only_alternatives": []
+}

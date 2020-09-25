@@ -11,6 +11,7 @@ manhattan(
   color2 = "grey",
   y_scale = TRUE,
   log10p = TRUE,
+  alpha = 1,
   speed = c("slow", "fast", "ultrafast"),
   pointsize = 0,
   pixels = c(512, 512),
@@ -32,9 +33,9 @@ manhattan(
 
 \item{speed}{The speed option. Fast and ultrafast use scattermore functionality}
 
-\item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. Please be sure what you are doing, since points can be lost.}
+\item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.  it}
 
-\item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). Please be sure what you are doing, since points can be lost.}
+\item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).}
 }
 \value{
 A ggplot object that makes a Manhattan plot.

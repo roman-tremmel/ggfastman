@@ -1,0 +1,16 @@
+add_color2=function(data,color1='black',color2='grey'){
+  if ('color'%in%colnames(data)){
+    user_color=data$color
+  } else {
+    user_color=rep(NA,nrow(data))
+  }
+  
+  data$color=ifelse(data$chr%in%paste0('chr',seq(1,22,2)),color1,color2)
+  data$color=ifelse(is.na(user_color),data$color,user_color)
+  return(data)
+}
+
+dplyr::slice(dplyr::group_by(gwas_data, chr)  ,  1:4)
+
+
+add_color2(gwas_data)
