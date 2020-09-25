@@ -28,24 +28,23 @@ As an example you can load some data which is included in the package and run fo
 
 ```{r}
 library(FASTGWASMAN)
-data(cad_gwas)
-cad_gwas$y <- -log10(cad_gwas$pval)
-head(cad_gwas)
+data("gwas_data")
+head(gwas_data)
 ```
 
 Important is that the data has the three columns which are required: 
 
-1. `chrom`
+1. `chr`
 2. `pos`
-3. `y`
+3. `pvalue`
 
-while the `chrom` has to be the format `c("chr1", "chr2", "chr3", ...)`, the `pos` column must be a numeric vector reflecting base pair positions and the `y` column contains the pvalues. Here we `-log10`-transform the pvalues. 
+while the `chr` can be the format `c("chr1", "chr2", "chr3", ...)` but numeric values e.g. `1:22` will be transformed, the `pos` column must be a numeric vector reflecting base pair positions and the `pvalue` column contains the pvalues. 
 
 
 We can plot the manhatten figure similar to the original `manhatten` function, but we have to specify the speed option with the "slow" parameter. 
 
 ```{r}
-FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "slow")
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "slow")
 ```
 
 ## The fast way
@@ -53,14 +52,14 @@ FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "slow")
 Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function and calling the manhatten function using the `"fast"` option. 
 
 ```{r}
-FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast")
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast")
 ```
 Zooooom, that was fast, right? How does it work? For the explanation I want to refer to the `scattermore` package. Only so much, the speed is reached with some C code, rasterization and some magic.
 
 Of course you can increase the point size and the resolution by loosing some of the speed. 
 
 ```{r}
-FASTGWASMAN::manhattan(cad_gwas, build='hg18', speed = "fast", pointsize = 3, pixels = c(1000, 1000))
+FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast", pointsize = 3, pixels = c(1000, 1000))
 ```
 
 
@@ -70,14 +69,14 @@ The fastest option is `speed = "ultrafast"`. The fastest way costs that the data
 
 ```{r}
 # some big data file with >10^6 rows
-big_cad_gwas <-  do.call(rbind, replicate(15, cad_gwas, simplify = FALSE)) 
-FASTGWASMAN::manhattan(big_cad_gwas, build='hg18', speed = "ultrafast")
+big_gwas_data <-  do.call(rbind, replicate(15, gwas_data, simplify = FALSE)) 
+FASTGWASMAN::manhattan(big_gwas_data, build='hg18', speed = "ultrafast")
 
 # compare with
-FASTGWASMAN::manhattan(big_cad_gwas, build='hg18', speed = "fast")
+FASTGWASMAN::manhattan(big_gwas_data, build='hg18', speed = "fast")
 
 # not compare with, unless you want to wait some minutes
-FASTGWASMAN::manhattan(big_cad_gwas, build='hg18', speed = "slow")
+FASTGWASMAN::manhattan(big_gwas_data, build='hg18', speed = "slow")
 
 ```
 
