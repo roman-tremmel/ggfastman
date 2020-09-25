@@ -7,14 +7,19 @@
 #' @param y_scale When an own y-scale is provided then set this to TRUE to avoid an error. 
 #' @param log10p If TRUE (default), the -log10 transformed pvalues are plotted
 #' @param speed The speed option. Fast and ultrafast use scattermore functionality
-#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.  it
+#' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.
 #' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). 
 #' @return A ggplot object that makes a Manhattan plot.
 #' @export
 #' @examples
-#' data(cad_gwas)
-#' cad_gwas$y=-log10(cad_gwas$pval)
-#' manhattan(cad_gwas,build='hg18')
+#' data("gwas_data")
+#' head(gwas_data)
+#' # slow
+#' manhattan(gwas_data, build='hg18')
+#' # fast
+#' manhattan(gwas_data, build = "hg18", speed = "fast")
+#' # ultrafast
+#' manhattan(gwas_data, build='hg18', speed = "ultrafast")
 
 manhattan=function(gwas, build=c('hg18','hg19','hg38'), color1='black', color2='grey', y_scale = TRUE,log10p=TRUE,alpha = 1,
                    speed = c("slow", "fast", "ultrafast"),

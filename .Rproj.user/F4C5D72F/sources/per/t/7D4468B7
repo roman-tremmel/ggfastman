@@ -3,22 +3,22 @@
     "path": "C:/Users/tremmel/Desktop/FASTGWASMAN/R/manhattan.R",
     "project_path": "R/manhattan.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "1842607569",
     "contents": "",
     "dirty": false,
     "created": 1601033288282.0,
     "source_on_save": false,
     "relative_order": 6,
     "properties": {
-        "cursorPosition": "52,0",
-        "scrollLine": "34"
+        "cursorPosition": "9,240",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1601033293,
+    "lastKnownWriteTime": 1601033794,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1601033293022,
+    "last_content_update": 1601033794399,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -33,7 +33,7 @@ manhattan(
 
 \item{speed}{The speed option. Fast and ultrafast use scattermore functionality}
 
-\item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.  it}
+\item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.}
 
 \item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).}
 }
@@ -44,7 +44,12 @@ A ggplot object that makes a Manhattan plot.
 Add together two numbers
 }
 \examples{
-data(cad_gwas)
-cad_gwas$y=-log10(cad_gwas$pval)
-manhattan(cad_gwas,build='hg18')
+data("gwas_data")
+head(gwas_data)
+# slow
+manhattan(gwas_data, build='hg18')
+# fast
+manhattan(gwas_data, build = "hg18", speed = "fast")
+# ultrafast
+manhattan(gwas_data, build='hg18', speed = "ultrafast")
 }

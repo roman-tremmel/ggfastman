@@ -3,7 +3,7 @@
     "path": "C:/Users/tremmel/Desktop/FASTGWASMAN/debug.R",
     "project_path": "debug.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3323243533",
     "contents": "",
     "dirty": false,
     "created": 1601024695540.0,
@@ -11,15 +11,15 @@
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "24,0",
+        "cursorPosition": "26,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1601033300,
+    "lastKnownWriteTime": 1601042672,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1601033300270,
+    "last_content_update": 1601042672755,
     "read_only": false,
     "read_only_alternatives": []
 }
