@@ -40,12 +40,12 @@ bench_plot <- function(x){
     NULL
   }
 
-  bench::mark(`FASTGWASMAN: slow` = slow_plot(), 
-              `FASTGWASMAN: fast` = fast_plot(), 
-              `FASTGWASMAN: ultrafast` = ultrafast_plot(), 
+  bench::mark(`FASTGWASMAN: slow` = slow_plot(),
+              `FASTGWASMAN: fast` = fast_plot(),
+              `FASTGWASMAN: ultrafast` = ultrafast_plot(),
               `fastman: fastman` = fastman_plot(),
               `qqman: manhattan` = qqman_plot(),
-              min_iterations = 10) 
+              min_iterations = 2) 
   
 }
 
