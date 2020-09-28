@@ -133,7 +133,7 @@ In addition the package includes also a fast way to create QQ-plots
 # Benchmarks
 
 The benchmarking will include all operations of plotting including the code evaluation, the plotting as well as saving of a .png file using `png()` for base R plots and `ggsave()` for the ggplot figures. For better comparisaon the same parameters were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
-We compared the three speed option included in this package with `fastman::fastman()` and `qqman::manhattan` functions using  `bench::mark()` and a minimum of 10 iterations. The complete code can be found here: [benchmark_plot](benchmark.R)
+We compared the three speed option included in this package with `fastman::fastman()` and `qqman::manhattan` functions using  `bench::mark()` with a minimum of 10 iterations. The complete code can be found here: [benchmark_plot](benchmark.R)
 
 The first comparision was performed using the example data of `xx` rows. As illustrated below, all three speed options were faster than the other two base R functions. 
 

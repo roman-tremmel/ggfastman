@@ -49,15 +49,19 @@ bench_plot <- function(x){
   
 }
 
-plot_bench <- function(x){
+plot_bench <- function(x, funcs = c("FASTGWASMAN: slow", 
+                                    "FASTGWASMAN: fast",
+                                    "FASTGWASMAN: ultrafast", 
+                                    "fastman: fastman",
+                                    "qqman: manhattan")){
   p <- plot(x)
-  p + scale_x_discrete("Function", limits = rev(c("FASTGWASMAN: slow", 
-                                      "FASTGWASMAN: fast",
-                                      "FASTGWASMAN: ultrafast", 
-                                      "fastman: fastman",
-                                      "qqman: manhattan")))
+  p + scale_x_discrete("", limits = rev(funcs)) +
+  ggsignif::geom_signif(comparisons = combn(funcs, 2, simplify = F), map_signif_level = T, step_increase = 0.2, color=1) +
+  theme_bw(base_size = 16) + 
+  theme(legend.position = "bottom")  
 }
-  
+
+
 
 
 
