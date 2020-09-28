@@ -173,6 +173,8 @@ In addition the package includes also a fast way to create QQ-plots
    FASTGWASMAN::fast_qq(pvalue = runif(10^6), speed = "fast")
 ```
 
+![Resulting manhattan plot](plot/qqplot.png)
+
 # Benchmarks
 
 The benchmarking will include all operations of plotting including the code evaluation, the plotting as well as saving of a .png file using `png()` for base R plots and `ggsave()` for the ggplot figures. For better comparisaon the same parameters were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
