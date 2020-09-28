@@ -54,6 +54,7 @@ plot_bench <- function(x, funcs = c("FASTGWASMAN: slow",
                                     "FASTGWASMAN: ultrafast", 
                                     "fastman: fastman",
                                     "qqman: manhattan")){
+  require(ggsignif)
   p <- plot(x)
   p + scale_x_discrete("", limits = rev(funcs)) +
   ggsignif::geom_signif(comparisons = combn(funcs, 2, simplify = F), map_signif_level = T, step_increase = 0.2, color=1) +
