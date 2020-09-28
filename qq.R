@@ -3,8 +3,8 @@ load("Y:/MIST+August/roman/gwas_data.rda")
 qq_fast(gwas_data$pvalue, inflation_method = "reg")
 qq_fast(gwas_data$pvalue, inflation_method = "med", speed = "ult")
 # or this
-qq_fast(runif(nrow(gwas_data)))
-qq_fast(runif(nrow(gwas_data)), inflation_method = "r")
+FASTGWASMAN::fast_qq(runif(nrow(gwas_data)))
+FASTGWASMAN::fast_qq(pvalue = runif(10^6), speed = "fast")
 
 # big data
 big_gwas_data <-  do.call(rbind, replicate(15, gwas_data, simplify = FALSE)) 

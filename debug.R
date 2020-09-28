@@ -1,4 +1,4 @@
-devtools::install_github("roman-tremmel/FASTGWASMAN")
+devtools::install_github("roman-tremmel/FASTGWASMAN", upgrade = "never")
 library(FASTGWASMAN)
 data("gwas_data")
 head(gwas_data)
@@ -11,10 +11,38 @@ gwas_data[gwas_data$rsid=='rs1333045','color']='red'
 
 FASTGWASMAN::fast_manhattan()
 
+gwas_data$color <- as.character(factor(gwas_data$chr, labels = 1:22))
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+
+gwas_data$color <- NA
+gwas_data[gwas_data$pvalue < 1e-5, ]$color <- "red"
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+
+library(tidyverse)
+gwas_data %>% 
+  mutate(gr = "Study 1") %>% 
+  bind_rows(., mutate(., gr= "Study 2",
+                      pvalue = runif(n()))) %>% 
+  FASTGWASMAN::fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
+  geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
+  geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
+  facet_wrap(~gr, nrow = 2, scales = "free_y") +
+  theme_bw(base_size = 16) + 
+  theme(panel.grid.minor.y = element_blank(),
+        panel.grid.minor.x = element_blank())
+  
+
+gwas_data2 <- gwas_data
+gwas_data2$pvalue <- runif(nrow(gwas_data2))
+
+
+
+rbind(gwas_data2,)
+
+
 
 
 FASTGWASMAN::fast_manhattan(gwas_data[order(gwas_data$rsid),], build = "hg18", speed = "slow")
-FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
 FASTGWASMAN::fast_manhattan(gwas_data[1, ], build = "hg18", speed = "fast", pixels = c(512, 512))
 FASTGWASMAN::fast_manhattan(gwas_data[,2:3 ], build = "hg18", speed = "fast", pixels = c(512, 512))
 FASTGWASMAN::fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1","chr9","chr21"),], build = "hg18", speed = "fast")
