@@ -157,7 +157,7 @@ In addition the package includes also a fast way to create QQ-plots
 ![Resulting manhatten plot2](plot/qqplot.png)
 
 # Questions and Bugs
-This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues).
+Please report bugs by open github issues [here](https://github.com/roman-tremmel/FASTGWASMAN/issues).
 
 
 
