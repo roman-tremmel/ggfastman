@@ -49,6 +49,55 @@ bench_plot <- function(x){
   
 }
 
+bench_qqplot <- function(x,y){
+  
+  trash_dir <- tempfile()
+  dir.create(trash_dir, recursive = TRUE)
+  on.exit(unlink(trash_dir, recursive = TRUE))
+  
+  slow_plot <- function() {
+    p <- FASTGWASMAN::fast_qq(y, speed = "slow")
+    ggsave(tempfile(tmpdir = trash_dir, fileext =".png"), width = 100, height = 100, units = "mm", dpi = 300, plot = p)
+    NULL
+  }
+  
+  fast_plot <- function() {
+    p <- FASTGWASMAN::fast_qq(y, speed = "fast")
+    ggsave(tempfile(tmpdir = trash_dir, fileext =".png"), width = 100, height = 100, units = "mm", dpi = 300, plot = p)
+    NULL
+  }
+  
+  ultrafast_plot <- function() {
+    p <- FASTGWASMAN::fast_qq(y, speed = "ultrafast")
+    ggsave(tempfile(tmpdir = trash_dir, fileext =".png"), width = 100, height = 100, units = "mm", dpi = 300, plot = p)
+    NULL
+  }
+  
+  fastman_plot <- function(){
+    png(tempfile(tmpdir = trash_dir, fileext =".png"), width = 100, height = 100,  res=300, units = "mm")
+    fastman::fastqq(x, p = "pvalue")
+    dev.off()
+    NULL
+  }
+  
+  qqman_plot <- function(){
+    png(tempfile(tmpdir = trash_dir, fileext =".png"), width = 270, height = 100,  res=300, units = "mm")
+    qqman::qq(y)
+    dev.off()
+    NULL
+  }
+  
+  
+  bench::mark(`FASTGWASMAN: slow` = slow_plot(),
+              `FASTGWASMAN: fast` = fast_plot(),
+              `FASTGWASMAN: ultrafast` = ultrafast_plot(),
+              `fastman: fastman` = fastman_plot(),
+              `qqman: manhattan` = qqman_plot(),
+              min_iterations = 2) 
+  
+}
+
+
 plot_bench <- function(x, funcs = c("FASTGWASMAN: slow", 
                                     "FASTGWASMAN: fast",
                                     "FASTGWASMAN: ultrafast", 
