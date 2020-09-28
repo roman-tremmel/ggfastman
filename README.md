@@ -67,7 +67,7 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", pointsize =
 
 ## The insane way
 
-The fastest option is `speed = "ultrafast"`. The fastest way costs that the data is plotted only in pure black. But I think it is it worth. 
+The fastest option is `speed = "ultrafast"`. The fastest way costs that the data is plotted only in pure black. But I think it is it worth. Benchmarks are analysed [below](https://github.com/roman-tremmel/FASTGWASMAN#benchmarks) 
 
 ```{r}
 # some big data file with >10^6 rows
