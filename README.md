@@ -100,7 +100,7 @@ FASTGWASMAN::fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1", "chr10", "chr
 
 - color
 
-Add you own color globally or highlight only individual SNPs. Of note, this is working for `shape` in the "slow"-mode as well.
+Add color globally or highlight only individual SNPs. Of note, this is working for `shape` in the "slow"-mode as well.
 
 ```{R}
 gwas_data2 <- gwas_data
@@ -109,6 +109,8 @@ FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 ![man 1](plot/man_color.png)
 
+
+Highlight only some SNPs
 
 ```{r}
 gwas_data2$color <- NA
