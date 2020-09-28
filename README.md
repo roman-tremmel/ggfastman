@@ -4,7 +4,7 @@ This is a very fast and easy-to-individualize plotting function for GWAS results
 
 A manhattan plot displays pvalues chromosomal positions against -mostly -log10 values- of genome-wide association studies between single nucleotide variants (SNV) or polymorphisms (SNP) and an endpoint e.g. expression, enzyme activity or case-control data. 
 
-One of the first R packages offering manhatten as well as qq plots was [qqman](https://github.com/stephenturner/qqman) from [Stephen Turner](https://twitter.com/strnr), and nowadays there are a lot of different packages and approaches available for R and python. But a very fast one, which is still fast when plotting billions of data points, is still missing. 
+One of the first R packages offering manhattan as well as qq plots was [qqman](https://github.com/stephenturner/qqman) from [Stephen Turner](https://twitter.com/strnr), and nowadays there are a lot of different packages and approaches available for R and python. But a very fast one, which is still fast when plotting billions of data points, is still missing. 
 
 This package `FASTGWASMAN` is trying to fill this gap. 
 
@@ -41,7 +41,7 @@ Important is that the data has the three columns which are required:
 while the `chr` should be the format `c("chr1", "chr2", "chr3", "chrX"...)` but numeric values e.g. `1:22` are also ok, the `pos` column must be a numeric vector reflecting base pair positions and the `pvalue` column contains the pvalues. 
 
 
-We can plot the manhatten figure similar to the original `manhatten` function, but we have to specify the speed option with the "slow" parameter. 
+We can plot the manhattan figure similar to the original `manhattan` function, but we have to specify the speed option with the "slow" parameter. 
 
 ```{r}
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
@@ -49,7 +49,7 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
 
 ## The fast way
 
-Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function and calling the manhatten function using the `"fast"` option. 
+Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function and calling the manhattan function using the `"fast"` option. 
 
 ```{r}
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast")
@@ -94,25 +94,19 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", y_scale = F
 ```
 
 Of note, set `y_scale = F` to avoid the error of a present second y-scale.
+Add you own color globally or highlight only some SNPs
 
-- Add shape or color globally or highlight only some SNPs
-
-```{r}
-gwas_data2 = gwas_data
-gwas_data2$color <- as.character(factor(gwas_data2$chr, labels = 1:22))
-FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
+```{R}
+gwas_data$color <- as.character(factor(gwas_data$chr, labels = 1:22))
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
 ```
 
-![man 1](plot/man_color.png)
 
-```{r}
-gwas_data2$color <- NA
-gwas_data2[gwas_data2$pvalue < 1e-5, ]$color <- "red"
-FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
-```
-![man 1](plot/color_ind.png)
 
-- add significance line(s) and snp annotation(s)
+
+
+
+- add significance line(s) and snp annotation
 
 ```{r}
 library(tidyverse)
@@ -127,37 +121,25 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "p
                            aes(label=rsid), color =1) # add top rsid
 ```
 
-![Resulting manhatten plot](plot/GWAS_plot_ind2.png)
+![Resulting manhattan plot](plot/GWAS_plot_ind2.png)
 
-
-- Facetting
-
-```{r}
-library(tidyverse)
-gwas_data %>% # rbind a second study 
-  mutate(gr = "Study 1") %>% 
-  bind_rows(., mutate(., gr= "Study 2",
-                      pvalue = runif(n()))) %>% 
-  FASTGWASMAN::fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
-    geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
-    geom_hline(yintercept = -log10(1e-5),  linetype =2, color ="grey") + 
-    facet_wrap(~gr, nrow = 2, scales = "free_y") +
-    theme_bw(base_size = 16) + 
-    theme(panel.grid.minor.y = element_blank(),
-          panel.grid.minor.x = element_blank())
-
-```
-![Resulting manhatten plot2](plot/manhatten_facet.png)
 
 In addition the package includes also a fast way to create QQ-plots
 
 ```{r}
    FASTGWASMAN::fast_qq(pvalue = runif(10^6), speed = "fast")
 ```
-![Resulting manhatten plot2](plot/qqplot.png)
+
 
 # Questions and Bugs
-Please report bugs by open github issues [here](https://github.com/roman-tremmel/FASTGWASMAN/issues).
+This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
+
+## To do
+
+- qq-plots
+- improved manuals
+- improved and cleaner code
+
 
 
 
