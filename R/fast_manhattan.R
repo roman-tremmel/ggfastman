@@ -53,7 +53,6 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   data=add_cumulative_pos(data,chrom_lengths)
   data=add_color(data,color1 = color1, color2 = color2)
   data=add_shape(data,shape=16)
-  xmax=get_total_length(chrom_lengths)
   x_breaks=get_x_breaks(chrom_lengths)
   
   color_map=unique(data$color)
@@ -70,7 +69,7 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   
   return(
     plot + ggplot2::theme_classic()+
-      ggplot2::scale_x_continuous(limits=c(0,xmax),expand=c(0.01,0),breaks=x_breaks,
+      ggplot2::scale_x_continuous(expand=c(0.01,0),breaks=x_breaks,
                                   labels=names(x_breaks),name='Chromosome')+
       ggplot2::scale_color_manual(values=color_map,guide='none')+
       ggplot2::scale_shape_identity() 

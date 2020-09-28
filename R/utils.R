@@ -41,10 +41,6 @@ get_chrom_lengths=function(build=c('hg18','hg19','hg38')){
   )
 }
 
-get_total_length=function(chrom_lengths){
-  sum(chrom_lengths)
-}
-
 get_cumulative_length=function(chrom_lengths){
   cumulative_length <- 0
   

@@ -86,15 +86,21 @@ FASTGWASMAN::fast_manhattan(big_gwas_data, build='hg18', speed = "slow")
 
 Of course you can individualize the plot using standard ggplot2 functions.
 
-- other scales
+- xy-scales
 
 ```{r}
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", y_scale = F) +
   ylim(2, 10)
+# Of note, set `y_scale = F` to avoid the error of a second y-scale.
+  
+# distinct chromosomes  on x-axis
+FASTGWASMAN::fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1", "chr10", "chr22"),], build='hg18', speed = "fast")
+  
 ```
 
-Of note, set `y_scale = F` to avoid the error of a present second y-scale.
-Add you own color globally or highlight only some SNPs
+- color
+
+Add you own color globally or highlight only individual SNPs. Of note, this is working for `shape` in the "slow"-mode as well.
 
 ```{R}
 gwas_data2 <- gwas_data
@@ -102,6 +108,7 @@ gwas_data2$color <- as.character(factor(gwas_data$chr, labels = 1:22))
 FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 ![man 1](plot/man_color.png)
+
 
 ```{r}
 gwas_data2$color <- NA
@@ -124,7 +131,7 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "p
                              top_n(1, -pvalue) %>% # extract highest y values
                              slice(1) %>% # if there are ties, choose the first one
                              filter(pvalue <= 5e-08), # filter for significant ones 
-                           aes(label=rsid), color =1) # add top rsid
+                             aes(label=rsid), color =1) # add top rsid
 ```
 
 ![Resulting manhattan plot](plot/GWAS_plot_ind2.png)
@@ -148,6 +155,17 @@ gwas_data %>% # rbind a second study
 
 ![Resulting manhattan plot](plot/manhatten_facet.png)
 
+
+- Zoomin using [`ggforce`](https://github.com/thomasp85/ggforce)
+
+```{r} 
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize = 3.2, pixels = c(1000,500)) +
+  geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
+  geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
+   ggforce::facet_zoom(x = chr == "chr9",zoom.size = 1)
+```
+
+![Resulting manhattan plot](plot/zoom.png)
 
 In addition the package includes also a fast way to create QQ-plots
 
