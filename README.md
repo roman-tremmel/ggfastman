@@ -97,16 +97,22 @@ Of note, set `y_scale = F` to avoid the error of a present second y-scale.
 Add you own color globally or highlight only some SNPs
 
 ```{R}
-gwas_data$color <- as.character(factor(gwas_data$chr, labels = 1:22))
-FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+gwas_data2 <- gwas_data
+gwas_data2$color <- as.character(factor(gwas_data$chr, labels = 1:22))
+FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
+```
+![man 1](plot/man_color.png)
+
+```{r}
+gwas_data2$color <- NA
+gwas_data2[gwas_data2$pvalue < 1e-5, ]$color <- "red"
+FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 
+![man 2](plot/color_ind.png)
 
 
-
-
-
-- add significance line(s) and snp annotation
+- add significance line(s) and snp annotation(s)
 
 ```{r}
 library(tidyverse)
@@ -124,6 +130,25 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "p
 ![Resulting manhattan plot](plot/GWAS_plot_ind2.png)
 
 
+- Facetting
+
+```{r}
+library(tidyverse)
+gwas_data %>% # rbind a second study
+  bind_rows(., mutate(., gr= "Study 2",
+                      pvalue = runif(n()))) %>% 
+  FASTGWASMAN::fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
+  geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
+  geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
+  facet_wrap(~gr, nrow = 2, scales = "free_y") +
+  theme_bw(base_size = 16) + 
+  theme(panel.grid.minor.y = element_blank(),
+        panel.grid.minor.x = element_blank())
+``` 
+
+![Resulting manhattan plot](plot/manhatten_facet.png)
+
+
 In addition the package includes also a fast way to create QQ-plots
 
 ```{r}
@@ -135,7 +160,7 @@ In addition the package includes also a fast way to create QQ-plots
 The benchmarking will include all operations of plotting including the code evaluation, the plotting as well as saving of a .png file using `png()` for base R plots and `ggsave()` for the ggplot figures. For better comparisaon the same parameters were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
 We compared the three speed option included in this package with `fastman::fastman()` and `qqman::manhattan` functions using  `bench::mark()` with a minimum of 10 iterations. The complete code can be found here: [benchmark_plot](benchmark.R)
 
-The first comparision was performed using the example data of `xx` rows. As illustrated below, all three speed options were faster than the other two base R functions. 
+The first comparision was performed using the example data of `xx` rows. As illustrated below, all three speed options were significantly faster than the other two base R functions. 
 
 ```{r}
 gwas_data$chrom <- as.numeric(gsub("chr", "", gwas_data$chr))
@@ -143,8 +168,7 @@ res_small_manhattan <- bench_plot(gwas_data)
 plot_bench(res_small_manhattan)
 ```
 
-[speed1](plot/speed1.png)
-
+![speed1](plot/speed1.png)
 
 In the next step we created manhattan plots on big data of more than nine million datapoints by replicating the example data 120-times.  
 
@@ -157,7 +181,7 @@ res_big_manhattan <- bench_plot(big_gwas_data)
 
 There were significant differences between the three analysed methods. 
 
-[speed2](plot/speed2.png)
+![speed2](plot/speed2.png)
 
 # Questions and Bugs
 Please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
