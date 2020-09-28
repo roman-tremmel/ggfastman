@@ -41,7 +41,7 @@ Important is that the data has the three columns which are required:
 while the `chr` should be the format `c("chr1", "chr2", "chr3", "chrX"...)` but numeric values e.g. `1:22` are also ok, the `pos` column must be a numeric vector reflecting base pair positions and the `pvalue` column contains the pvalues. 
 
 
-We can plot the manhattan figure similar to the original `manhattan` function, but we have to specify the speed option with the "slow" parameter. 
+We can plot the manhattan figure with the speed option "slow" using only ggplot2 functions as follows. 
 
 ```{r}
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
@@ -49,7 +49,7 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
 
 ## The fast way
 
-Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function and calling the manhattan function using the `"fast"` option. 
+Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function by calling the manhattan function using the `"fast"` option. 
 
 ```{r}
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast")
