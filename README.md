@@ -192,7 +192,7 @@ plot_bench(res_small_manhattan)
 
 ![speed1](plot/speed1.png)
 
-In the next step we created manhattan plots on big data of more than nine million datapoints by replicating the example data 120-times.  Since on my system (32GB RAM; i7-9700, 3GHz) the slow option failed the benchmarking due to allocation error, we run the bench_plot function for this function again with 2 iterations.  
+In the next step we created manhattan plots on big data of more than nine million datapoints by replicating the example data 120-times.  Since on my system (32GB RAM; i7-9700, 3GHz) the slow option failed the benchmarking due to an allocation error, we run the bench_plot function for this function again with only 2 iterations.  
 
 ```{r}
 big_gwas_data <-  do.call(rbind, replicate(120, gwas_data, simplify = FALSE)) 
@@ -201,7 +201,7 @@ nrow(big_gwas_data)
 res_big_manhattan <- bench_plot(big_gwas_data)
 ```
 
-There were significant differences between the three analysed methods. 
+There were significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well compared to the "fast" option. This fast behavior is achieved due to data cropping in the non-significant pvalue areas e.g. using only 20k pvalues>0.1, 0.01 > pvalues < 0.1, ... Nevertheless, the performance using the RStudio plotting window is even slower compared to the fast version. But if you are sticked to base R, the `fastman` package is your choice for fast plotting.     
 
 ![speed2](plot/speed2.png)
 
