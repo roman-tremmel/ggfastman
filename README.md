@@ -130,15 +130,38 @@ In addition the package includes also a fast way to create QQ-plots
    FASTGWASMAN::fast_qq(pvalue = runif(10^6), speed = "fast")
 ```
 
+# Benchmarks
+
+The benchmarking will include all operations of plotting including the code evaluation, the plotting as well as saving of a .png file using `png()` for base R plots and `ggsave()` for the ggplot figures. For better comparisaon the same parameters were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
+We compared the three speed option included in this package with `fastman::fastman()` and `qqman::manhattan` functions using  `bench::mark()` and a minimum of 10 iterations. The complete code can be found here: [benchmark_plot](benchmark.R)
+
+The first comparision was performed using the example data of `xx` rows. As illustrated below, all three speed options were faster than the other two base R functions. 
+
+```{r}
+gwas_data$chrom <- as.numeric(gsub("chr", "", gwas_data$chr))
+res_small_manhattan <- bench_plot(gwas_data)
+plot_bench(res_small_manhattan)
+```
+
+[speed1](plot/speed1.png)
+
+
+In the next step we created manhattan plots on big data of more than nine million datapoints by replicating the example data 120-times.  
+
+```{r}
+big_gwas_data <-  do.call(rbind, replicate(120, gwas_data, simplify = FALSE)) 
+nrow(big_gwas_data)
+9495360
+res_big_manhattan <- bench_plot(big_gwas_data)
+```
+
+There were significant differences between the three analysed methods. 
+
+[speed2](plot/speed2.png)
 
 # Questions and Bugs
-This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
+Please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
 
-## To do
-
-- qq-plots
-- improved manuals
-- improved and cleaner code
 
 
 
