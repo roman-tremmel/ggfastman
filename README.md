@@ -201,7 +201,7 @@ nrow(big_gwas_data)
 res_big_manhattan <- bench_plot(big_gwas_data)
 ```
 
-There were significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well. This fast behavior is achieved due to data cropping in the non-significant pvalue areas e.g. uses only 20k SNvs of pvalues >0.1, >0.01 & < 0.1... Nevertheless, the performance using the RStudio plotting window is much worst compared to the fast version of the `fast_manhattan` function.    
+There were significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well compared to the "fast" option. This fast behavior is achieved due to data cropping in the non-significant pvalue areas e.g. using only 20k pvalues>0.1, 0.01 > pvalues < 0.1, ... Nevertheless, the performance using the RStudio plotting window is even slower compared to the fast version. But if you are sticked to base R, the `fastman` package is your choice for fast plotting.     
 
 ![speed2](plot/speed2.png)
 
