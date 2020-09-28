@@ -98,25 +98,25 @@ Of note, set `y_scale = F` to avoid the error of a present second y-scale.
 - Add shape or color globally or highlight only some SNPs
 
 ```{r}
-gwas_data$color <- as.character(factor(gwas_data$chr, labels = 1:22))
-FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+gwas_data2 = gwas_data
+gwas_data2$color <- as.character(factor(gwas_data2$chr, labels = 1:22))
+FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 
 ![man 1](plot/man_color.png)
 
 ```{r}
-gwas_data$color <- NA
-gwas_data[gwas_data$pvalue < 1e-5, ]$color <- "red"
-FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+gwas_data2$color <- NA
+gwas_data2[gwas_data2$pvalue < 1e-5, ]$color <- "red"
+FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 ![man 1](plot/color_ind.png)
 
-- add significance line(s) and snp annotation
+- add significance line(s) and snp annotation(s)
 
 ```{r}
 library(tidyverse)
 library(ggrepel)
-gwas_data = gwas_data[,1:4]
 FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
   geom_hline(yintercept = -log10(5e-08), linetype =2, color ="darkgrey") + # genomewide significance line
   geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey")  + # suggestive significance line
@@ -157,14 +157,7 @@ In addition the package includes also a fast way to create QQ-plots
 ![Resulting manhatten plot2](plot/qqplot.png)
 
 # Questions and Bugs
-This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
-
-## To do
-
-- qq-plots
-- improved manuals
-- improved and cleaner code
-
+This R package is still beta. I will work on it as soon I find some time. Please be patient and please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues).
 
 
 
