@@ -139,12 +139,12 @@ gwas_data %>% # rbind a second study
   bind_rows(., mutate(., gr= "Study 2",
                       pvalue = runif(n()))) %>% 
   FASTGWASMAN::fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
-  geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
-  geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
-  facet_wrap(~gr, nrow = 2, scales = "free_y") +
-  theme_bw(base_size = 16) + 
-  theme(panel.grid.minor.y = element_blank(),
-        panel.grid.minor.x = element_blank())
+    geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
+    geom_hline(yintercept = -log10(1e-5),  linetype =2, color ="grey") + 
+    facet_wrap(~gr, nrow = 2, scales = "free_y") +
+    theme_bw(base_size = 16) + 
+    theme(panel.grid.minor.y = element_blank(),
+          panel.grid.minor.x = element_blank())
 
 ```
 ![Resulting manhatten plot2](plot/manhatten_facet.png)

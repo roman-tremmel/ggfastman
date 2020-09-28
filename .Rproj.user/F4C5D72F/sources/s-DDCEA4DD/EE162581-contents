@@ -36,9 +36,11 @@ gwas_data2 <- gwas_data
 gwas_data2$pvalue <- runif(nrow(gwas_data2))
 
 
+gwas_data2 = gwas_data
+gwas_data2$color <- as.character(factor(gwas_data2$chr, labels = 1:22))
+unique(gwas_data2$color)
 
-rbind(gwas_data2,)
-
+barplot(1:22, col=unique(gwas_data2$color))
 
 
 
