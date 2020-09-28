@@ -88,14 +88,15 @@ bench_qqplot <- function(x,y){
   }
   
   
-  bench::mark(`FASTGWASMAN: slow` = slow_plot(),
+  bench::mark(
+              `FASTGWASMAN: slow` = slow_plot(),
               `FASTGWASMAN: fast` = fast_plot(),
               `FASTGWASMAN: ultrafast` = ultrafast_plot(),
               `fastman: fastman` = fastman_plot(),
               `qqman: manhattan` = qqman_plot(),
               min_iterations = 2) 
-  
 }
+  
 
 
 plot_bench <- function(x, funcs = c("FASTGWASMAN: slow", 
@@ -107,8 +108,8 @@ plot_bench <- function(x, funcs = c("FASTGWASMAN: slow",
   p <- plot(x)
   p + scale_x_discrete("", limits = rev(funcs)) +
   ggsignif::geom_signif(comparisons = combn(funcs, 2, simplify = F), map_signif_level = T, step_increase = 0.2, color=1) +
-  theme_bw(base_size = 16) + 
-  theme(legend.position = "bottom")  
+  theme_bw(base_size = 16) +
+  theme(legend.position = "bottom")
 }
 
 
