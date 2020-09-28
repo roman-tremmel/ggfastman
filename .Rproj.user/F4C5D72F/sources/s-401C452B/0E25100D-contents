@@ -1,20 +1,21 @@
 # test this 
 load("Y:/MIST+August/roman/gwas_data.rda")
 qq_fast(gwas_data$pvalue, inflation_method = "reg")
-qq_fast(gwas_data$pvalue, inflation_method = "med")
+qq_fast(gwas_data$pvalue, inflation_method = "med", speed = "ult")
 # or this
 qq_fast(runif(nrow(gwas_data)))
 qq_fast(runif(nrow(gwas_data)), inflation_method = "r")
 
 # big data
 big_gwas_data <-  do.call(rbind, replicate(15, gwas_data, simplify = FALSE)) 
-qq_fast(big_gwas_data$pvalue)
+qq_fast(big_gwas_data$pvalue, speed = "ult", inflation_method = "reg")
 
 
 # -----------------------------------------------------------------------
 # QQ-plot function
 # -----------------------------------------------------------------------
-qq_fast <- function(pvalue,linecolor="deeppink",ci_color="steelblue",ci_alpha = 0.3,conf.alpha=.05,confint=T,log10=T,inflation_method="median"){
+qq_fast <- function(pvalue,linecolor="deeppink",ci_color="steelblue",ci_alpha = 0.3,conf.alpha=.05,
+                    confint=T,log10=T,inflation_method="median",title="QQ-plot"){
 
   inflation_method <- match.arg(inflation_method, choices = c("median","regression"))
  # calculate expected and transform observed  
@@ -63,8 +64,16 @@ qq_fast <- function(pvalue,linecolor="deeppink",ci_color="steelblue",ci_alpha = 
    scattermore::geom_scattermore(pointsize = 1.2) +      
    ggplot2::xlab(expression(Expected ~ ~-log[10](italic(p)))) +  
    ggplot2::ylab(expression(Observed ~ ~-log[10](italic(p)))) +
-   ggplot2::ggtitle("QQ-plot", subtitle = paste0("lambda gc=",gif_out$es,gif_out$se)) +
+   ggplot2::ggtitle(title, subtitle = substitute(paste(lambda~gc,"=", v1, v2), list(v1=gif_out$es, v2=gif_out$se))) +
    ggplot2::theme_bw()
+}
  
   
-}
+qq_fast(gwas_data$pvalue, inflation_method = "med", title = "sdlkfj")
+
+
+
+labNames <- c('xLab','yLab')
+plot(c(1:10),
+     xlab=substitute(paste(nn, x^2), list(nn=labNames[1])),
+     ylab=substitute(paste(nn, y^2), list(nn=labNames[2])))

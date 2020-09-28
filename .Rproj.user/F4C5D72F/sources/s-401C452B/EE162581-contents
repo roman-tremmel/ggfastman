@@ -3,14 +3,27 @@ library(FASTGWASMAN)
 data("gwas_data")
 head(gwas_data)
 
-gwas_data$chrom <- as.numeric(gsub("chr","",gwas_data$chr))
+big_gwas_data <-  do.call(rbind, replicate(15, gwas_data, simplify = FALSE)) 
+gwas_data$chr <- as.numeric(gsub("chr","",gwas_data$chr))
 gwas_data[gwas_data$rsid=='rs602633','color']='green'
 gwas_data[gwas_data$rsid=='rs1333045','color']='red'
-FASTGWASMAN::manhattan(gwas_data, build = "hg18", speed = "slow")
-FASTGWASMAN::manhattan(gwas_data, build = "hg18", speed = "fast", pixels = c(512, 512))
-FASTGWASMAN::manhattan(gwas_data, build = "hg18", speed = "fast", pixels = c(512, 512)*2, pointsize = 1.2)
+
+
+FASTGWASMAN::fast_manhattan()
+
+
+
+FASTGWASMAN::fast_manhattan(gwas_data[order(gwas_data$rsid),], build = "hg18", speed = "slow")
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast")
+FASTGWASMAN::fast_manhattan(gwas_data[1, ], build = "hg18", speed = "fast", pixels = c(512, 512))
+FASTGWASMAN::fast_manhattan(gwas_data[,2:3 ], build = "hg18", speed = "fast", pixels = c(512, 512))
+FASTGWASMAN::fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1","chr9","chr21"),], build = "hg18", speed = "fast")
+
+FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast", pixels = c(512, 512)*2, pointsize = 1.2)
 FASTGWASMAN::manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500))
-qqman::manhattan(cad_gwas, bp = "pos", chr = "chrom", p = "pvalue")
+qqman::manhattan(gwas_data, bp = "pos", chr = "chrom", p = "pvalue")
+
+FASTGWASMAN::fast_qq(gwas_data$pvalue)
 
 
 FASTGWASMAN::manhattan(gwas_data, build = "hg18", speed = "fast", pixels = c(512, 512)*2)

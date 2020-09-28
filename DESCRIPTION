@@ -8,7 +8,7 @@ Description: A function to generate manhattenplots for GWAS data in a very fast 
 License: What license is it under?
 URL:
 BugReports: to me
-Depends: R (>= 3.0.0)
+Depends: R (>= 3.5.0)
 Imports: ggplot2 (>= 2.2.1), scattermore
 Encoding: UTF-8
 RoxygenNote: 7.1.1.9000
