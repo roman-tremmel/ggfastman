@@ -179,10 +179,10 @@ In addition the package includes also a fast way to create QQ-plots
 
 # Benchmarks
 
-The benchmarking will include all operations of plotting including the code evaluation, the plotting as well as saving of a .png file using `png()` for base R plots and `ggsave()` for the ggplot figures. For better comparisaon the same parameters were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
+The benchmark analysis includes all operations of a plot generation including the code evaluation, the plotting as well as the saving of a .png file using `png()` for base R plots and `ggsave()` for ggplot figures. For a better comparison the same parameters for both approaches were chosen e.g. `width = 270`, `height = 100` & `units = "mm"` as well as `res=300` and `dpi = 300`, respectively.
 We compared the three speed option included in this package with `fastman::fastman()` and `qqman::manhattan` functions using  `bench::mark()` with a minimum of 10 iterations. The complete code can be found here: [benchmark_plot](benchmark.R)
 
-The first comparision was performed using the example data of app. `80k` rows. As illustrated below, all three speed options were significantly faster than the other two base R functions, although the "slow" option performed rather similar compared to the base R functions regarding the user experience.  
+The first comparision was performed using the example GWAS data of app. `80k` pvalues/rows. As illustrated below, all three speed options were significantly faster than the other two base R functions, although the "slow" option performed rather similar compared to the base R functions regarding the user experience.  
 
 ```{r}
 gwas_data$chrom <- as.numeric(gsub("chr", "", gwas_data$chr))
@@ -192,7 +192,7 @@ plot_bench(res_small_manhattan)
 
 ![speed1](plot/speed1.png)
 
-In the next step we created manhattan plots on big data of more than nine million datapoints by replicating the example data 120-times.  Since on my system (32GB RAM; i7-9700, 3GHz) the slow option failed the benchmarking due to an allocation error, we run the bench_plot function for this function again with only 2 iterations.  
+In the next step we created manhattan plots on really big data of more than nine million datapoints by replicating the example data 120-times.  Since on the test system (CPU i7-9700, 3GHz with 32GB RAM) the slow option failed the benchmarking due to an allocation error, we run the bench_plot function for this function again with only 2 iterations.  
 
 ```{r}
 big_gwas_data <-  do.call(rbind, replicate(120, gwas_data, simplify = FALSE)) 
@@ -201,7 +201,7 @@ nrow(big_gwas_data)
 res_big_manhattan <- bench_plot(big_gwas_data)
 ```
 
-There were significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well compared to the "fast" option. This fast behavior is achieved due to data cropping in the non-significant pvalue areas e.g. using only 20k pvalues>0.1, 0.01 > pvalues < 0.1, ... Nevertheless, the performance using the RStudio plotting window is even slower compared to the fast version. But if you are sticked to base R, the `fastman` package is your choice for fast plotting.     
+There were again significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well. This fast behavior with this function is achieved with data cropping in the non-significant pvalue areas e.g. using only 20k pvalues>0.1, 0.01 > pvalues < 0.1, ... Nevertheless, the expierienced performance using the RStudio plotting window is even slower compared to the "fast" version. But if you are sticked to base R, the `fastman` package seems to be the choice for a fast plotting of >9x10^6 pvalues.     
 
 ![speed2](plot/speed2.png)
 
