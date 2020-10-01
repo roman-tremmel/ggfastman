@@ -1,6 +1,6 @@
-Package: FASTGWASMAN
+Package: ggfastman
 Type: Package
-Title: FASTGWASMAN: ggplot2-based manhattenplots in fast and ultrafast
+Title: ggfastman: ggplot2-based manhattenplots in fast and ultrafast
 Version: 0.1
 Author: Roman Tremmel
 Maintainer: Roman Tremmel <roman.tremmel@gmail.com>
