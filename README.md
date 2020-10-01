@@ -190,7 +190,7 @@ res_small_manhattan <- bench_plot(gwas_data)
 plot_bench(res_small_manhattan)
 ```
 
-![speed1](plot/speed1.png)
+![speed1](plot/speed1_1.png)
 
 In the next step we created manhattan plots on really big data of more than nine million datapoints by replicating the example data 120-times.  Since on the test system (CPU i7-9700, 3GHz with 32GB RAM) the slow option failed the benchmarking due to an allocation error, we run the bench_plot function for this function again with only 2 iterations.  
 
@@ -203,7 +203,7 @@ res_big_manhattan <- bench_plot(big_gwas_data)
 
 There were again significant differences between the three analysed methods. Interestingly the [`fastman`](https://github.com/danielldhwang/fastman/blob/master/R/fastman.R) function performed very well. This fast behavior with this function is achieved with data cropping in the non-significant pvalue areas e.g. using only 20k pvalues>0.1, 0.01 > pvalues < 0.1, ... Nevertheless, the expierienced performance using the RStudio plotting window is even slower compared to the "fast" version. But if you are sticked to base R, the `fastman` package seems to be the choice for a fast plotting of >9x10^6 pvalues.     
 
-![speed2](plot/speed2.png)
+![speed2](plot/speed2_2.png)
 
 # Questions and Bugs
 Please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/ggfastman/issues). 
