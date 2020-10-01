@@ -192,7 +192,7 @@ plot_bench(res_small_manhattan)
 
 ![speed1](plot/speed1_1.png)
 
-In the next step we created manhattan plots on really big data of more than nine million datapoints by replicating the example data 120-times.  Since on the test system (CPU i7-9700, 3GHz with 32GB RAM) the slow option failed the benchmarking due to an allocation error, we run the bench_plot function for this function again with only 2 iterations.  
+In the next step we created manhattan plots on really big data of more than nine million datapoints by replicating the example data 120-times on a CPU i7-9700, 3GHz with 32GB RAM system. 
 
 ```{r}
 big_gwas_data <-  do.call(rbind, replicate(120, gwas_data, simplify = FALSE)) 
