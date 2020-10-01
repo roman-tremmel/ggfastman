@@ -6,7 +6,7 @@ A manhattan plot displays pvalues chromosomal positions against -mostly -log10 v
 
 One of the first R packages offering manhattan as well as qq plots was [qqman](https://github.com/stephenturner/qqman) from [Stephen Turner](https://twitter.com/strnr), and nowadays there are a lot of different packages and approaches available for R and python. But a very fast one, which is still fast when plotting billions of data points, is still missing. 
 
-This package `FASTGWASMAN` is trying to fill this gap. 
+This package `ggfastman` is trying to fill this gap. 
 
 
 # Installation
@@ -14,7 +14,7 @@ This package `FASTGWASMAN` is trying to fill this gap.
 So far the package is tested on Windows and MacOS, but is not on Cran, thus you need to: 
 
 
-    devtools::install_github("roman-tremmel/FASTGWASMAN", upgrade = "never")
+    devtools::install_github("roman-tremmel/ggfastman", upgrade = "never")
  
 The package is depending on the additional packages `ggplot2` and `scattermore`. So far, the latter one has to be installed using:
 
@@ -27,7 +27,7 @@ The package is depending on the additional packages `ggplot2` and `scattermore`.
 As an example you can load some data which is included in the package and run following code. More information of the data set is provided [here](https://github.com/boxiangliu/manhattan).
 
 ```{r}
-library(FASTGWASMAN)
+library(ggfastman)
 data("gwas_data")
 head(gwas_data)
 ```
@@ -44,7 +44,7 @@ while the `chr` should be the format `c("chr1", "chr2", "chr3", "chrX"...)` but 
 We can plot the manhattan figure with the speed option "slow" using only ggplot2 functions as follows. 
 
 ```{r}
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
+fast_manhattan(gwas_data, build='hg18', speed = "slow")
 ```
 
 ## The fast way
@@ -52,33 +52,33 @@ FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "slow")
 Depending on your system this takes a while, particularly when plotting pvalues of more than 1,000,000 SNVs. Therefore, we replace the `geom_point()` function with the `scattermore::geom_scattermore()` function by calling the manhattan function using the `"fast"` option. 
 
 ```{r}
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast")
+fast_manhattan(gwas_data, build='hg18', speed = "fast")
 #or
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "f")
+fast_manhattan(gwas_data, build='hg18', speed = "f")
 ```
 Zooooom, that was fast, right? How does it work? For the explanation I want to refer to the `scattermore` package. Only so much, the speed is reached with some C code, rasterization and some magic.
 
 Of course you can increase the point size and the resolution by loosing some of the speed. 
 
 ```{r}
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", pointsize = 3, pixels = c(1000, 1000))
+fast_manhattan(gwas_data, build='hg18', speed = "fast", pointsize = 3, pixels = c(1000, 1000))
 ```
 
 
 ## The insane way
 
-The fastest option is `speed = "ultrafast"`. The fastest way costs that the data is plotted only in pure black. But I think it is it worth. Benchmarks are analysed [below](https://github.com/roman-tremmel/FASTGWASMAN#benchmarks) 
+The fastest option is `speed = "ultrafast"`. The fastest way costs that the data is plotted only in pure black. But I think it is it worth. Benchmarks are analysed [below](https://github.com/roman-tremmel/ggfastman#benchmarks) 
 
 ```{r}
 # some big data file with >10^6 rows
 big_gwas_data <-  do.call(rbind, replicate(15, gwas_data, simplify = FALSE)) 
-FASTGWASMAN::fast_manhattan(big_gwas_data, build='hg18', speed = "ultrafast")
+fast_manhattan(big_gwas_data, build='hg18', speed = "ultrafast")
 
 # compare with
-FASTGWASMAN::fast_manhattan(big_gwas_data, build='hg18', speed = "fast")
+fast_manhattan(big_gwas_data, build='hg18', speed = "fast")
 
 # not compare with, unless you want to wait some minutes
-FASTGWASMAN::fast_manhattan(big_gwas_data, build='hg18', speed = "slow")
+fast_manhattan(big_gwas_data, build='hg18', speed = "slow")
 
 ```
 
@@ -89,12 +89,12 @@ Of course you can individualize the plot using standard ggplot2 functions.
 - xy-scales
 
 ```{r}
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", y_scale = F) +
+fast_manhattan(gwas_data, build='hg18', speed = "fast", y_scale = F) +
   ylim(2, 10)
 # Of note, set `y_scale = F` to avoid the error of a second y-scale.
   
 # distinct chromosomes  on x-axis
-FASTGWASMAN::fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1", "chr10", "chr22"),], build='hg18', speed = "fast")
+fast_manhattan(gwas_data[gwas_data$chr %in% c("chr1", "chr10", "chr22"),], build='hg18', speed = "fast")
   
 ```
 
@@ -105,7 +105,7 @@ Add color globally or highlight only individual SNPs. Of note, this is working f
 ```{R}
 gwas_data2 <- gwas_data
 gwas_data2$color <- as.character(factor(gwas_data$chr, labels = 1:22))
-FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
+fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 ![man 1](plot/man_color.png)
 
@@ -115,7 +115,7 @@ Highlight only some SNPs
 ```{r}
 gwas_data2$color <- NA
 gwas_data2[gwas_data2$pvalue < 1e-5, ]$color <- "red"
-FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
+fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```
 
 ![man 2](plot/color_ind.png)
@@ -126,7 +126,7 @@ FASTGWASMAN::fast_manhattan(gwas_data2, build = "hg18", speed = "fast")
 ```{r}
 library(tidyverse)
 library(ggrepel)
-FASTGWASMAN::fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
+fast_manhattan(gwas_data, build='hg18', speed = "fast", color1 = "pink", color2 = "turquoise", pointsize = 3, pixels = c(1000, 500)) +
   geom_hline(yintercept = -log10(5e-08), linetype =2, color ="darkgrey") + # genomewide significance line
   geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey")  + # suggestive significance line
   ggrepel::geom_text_repel(data = . %>% group_by(chr) %>% # ggrepel to avoid overplotting
@@ -146,7 +146,7 @@ library(tidyverse)
 gwas_data %>% # rbind a second study
   bind_rows(., mutate(., gr= "Study 2",
                       pvalue = runif(n()))) %>% 
-  FASTGWASMAN::fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
+  fast_manhattan(., build = "hg18", speed = "fast", pointsize = 2.1, pixels = c(1000,500)) + 
     geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
     geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
     facet_wrap(~gr, nrow = 2, scales = "free_y") +
@@ -161,7 +161,7 @@ gwas_data %>% # rbind a second study
 - Zoom using [`ggforce`](https://github.com/thomasp85/ggforce)
 
 ```{r} 
-FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize = 3.2, pixels = c(1000,500)) +
+fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize = 3.2, pixels = c(1000,500)) +
   geom_hline(yintercept = -log10(5e-08), linetype =2, color ="deeppink") + 
   geom_hline(yintercept = -log10(1e-5), linetype =2, color ="grey") + 
    ggforce::facet_zoom(x = chr == "chr9",zoom.size = 1)
@@ -172,7 +172,7 @@ FASTGWASMAN::fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize 
 In addition the package includes also a fast way to create QQ-plots
 
 ```{r}
-   FASTGWASMAN::fast_qq(pvalue = runif(10^6), speed = "fast")
+fast_qq(pvalue = runif(10^6), speed = "fast")
 ```
 
 ![Resulting manhattan plot](plot/qqplot.png)
