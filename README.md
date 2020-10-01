@@ -206,7 +206,7 @@ There were again significant differences between the three analysed methods. Int
 ![speed2](plot/speed2.png)
 
 # Questions and Bugs
-Please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/FASTGWASMAN/issues). 
+Please report bugs by open github issue(s) [here](https://github.com/roman-tremmel/ggfastman/issues). 
 
 
 
