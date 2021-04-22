@@ -42,7 +42,6 @@ A ggplot2 object/plot
 }
 \description{
 This is a very fast and easy-to-individualize plotting function for GWAS results e.g. pvalues based on \code{\link{ggplot2}} and \code{\link{scattermore}}.
-The data have to contain the columns "chr", "pos" and "pvalue". Of note, chromosomes should be written with "chr"-tag like "chr1".
 }
 \examples{
 data("gwas_data")
