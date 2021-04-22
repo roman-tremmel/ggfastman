@@ -19,8 +19,6 @@ fast_manhattan(
 )
 }
 \arguments{
-\item{data}{Data have to contain the columns "chr", "pos" and "pvalue". Of note, chromosomes should be written with "chr"-tag like "chr1".}  
-  
 \item{build}{Genomic build. Currently hg18, hg19, and hg38 are supported. If you are not sure about, set the default "hg19".}
 
 \item{color1}{Color for odd-numbered chromosomes}
@@ -44,6 +42,7 @@ A ggplot2 object/plot
 }
 \description{
 This is a very fast and easy-to-individualize plotting function for GWAS results e.g. pvalues based on \code{\link{ggplot2}} and \code{\link{scattermore}}.
+The data have to contain the columns "chr", "pos" and "pvalue". Of note, chromosomes should be written with "chr"-tag like "chr1".
 }
 \examples{
 data("gwas_data")
