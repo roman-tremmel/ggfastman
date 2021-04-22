@@ -38,7 +38,7 @@ Important is that the data has the three columns which are required:
 2. `pos`
 3. `pvalue`
 
-while the `chr` should be the format `c("chr1", "chr2", "chr3", "chrX"...)` but numeric values e.g. `1:22` are also ok, the `pos` column must be a numeric vector reflecting base pair positions and the `pvalue` column contains the pvalues. 
+The `chr` should be in the format `c("chr1", "chr2", "chr3", "chrX"...)`, the `pos` column must be a numeric vector reflecting base pair positions and the `pvalue` column contains the pvalues. 
 
 
 We can plot the manhattan figure with the speed option "slow" using only ggplot2 functions as follows. 
