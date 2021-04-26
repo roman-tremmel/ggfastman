@@ -55,4 +55,6 @@ fast_manhattan(gwas_data, build='hg18')
 fast_manhattan(gwas_data, build = "hg18", speed = "fast")
 # ultrafast
 fast_manhattan(gwas_data, build='hg18', speed = "ultrafast")
+# highlight most significant snps
+fast_manhattan(gwas_data, build='hg18', speed = "fast", highlight = gwas_data[gwas_data$pvalue < 10e-20,]$rsid)
 }
