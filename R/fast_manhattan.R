@@ -86,8 +86,8 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
       }
      
     if("highlight" %in% colnames(data)){
-      plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], aes(fill = highlight), shape = 21, show.legend = F) +
-        scale_fill_identity()
+      plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], ggplot2::aes(fill = highlight), shape = 21, show.legend = F) +
+        ggplot2::scale_fill_identity()
       }
 
   return(
