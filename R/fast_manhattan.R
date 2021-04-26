@@ -97,5 +97,4 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
       ggplot2::scale_color_manual(values=color_map,guide='none')+
       ggplot2::scale_shape_identity() 
   )
-  rm(plot)
 }
