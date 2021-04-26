@@ -15,10 +15,13 @@ fast_manhattan(
   speed = "fast",
   pointsize = 0,
   pixels = c(512, 512),
+  highlight = NULL,
   ...
 )
 }
 \arguments{
+\item{data}{A data.frame. Columns 'chr', 'pos', and 'pvalue' are required}
+
 \item{build}{Genomic build. Currently hg18, hg19, and hg38 are supported. If you are not sure about, set the default "hg19".}
 
 \item{color1}{Color for odd-numbered chromosomes}
@@ -35,7 +38,7 @@ fast_manhattan(
 
 \item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).}
 
-\item{gwas}{A data.frame. Columns "chr", "pos", and "pvalue" are required}
+\item{highlight}{Character vector with matching entries of 'data$rsid' or column 'highlight' in data with NAs or concrete colors e.g. 'deeppink'.}
 }
 \value{
 A ggplot2 object/plot

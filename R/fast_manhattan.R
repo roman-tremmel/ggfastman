@@ -2,7 +2,7 @@
 #' 
 #' This is a very fast and easy-to-individualize plotting function for GWAS results e.g. pvalues based on \code{\link{ggplot2}} and \code{\link{scattermore}}. 
 #'
-#' @param gwas A data.frame. Columns "chr", "pos", and "pvalue" are required
+#' @param data A data.frame. Columns 'chr', 'pos', and 'pvalue' are required
 #' @param build Genomic build. Currently hg18, hg19, and hg38 are supported. If you are not sure about, set the default "hg19".
 #' @param color1 Color for odd-numbered chromosomes
 #' @param color2 Color for even-numbered chromosomes
@@ -11,6 +11,7 @@
 #' @param speed The speed option. Fast and ultrafast use \code{\link{scattermore}} functionality
 #' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.
 #' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). 
+#' @param highlight Character vector with matching entries of 'data$rsid' or column 'highlight' in data with NAs or concrete colors e.g. 'deeppink'. 
 #' @return A ggplot2 object/plot
 #' @export
 #' @examples
@@ -23,7 +24,7 @@
 #' # ultrafast
 #' fast_manhattan(gwas_data, build='hg18', speed = "ultrafast")
 fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale = TRUE,log10p=TRUE,alpha = 1,
-                   speed = "fast",pointsize=0, pixels=c(512, 512), ...){
+                   speed = "fast",pointsize=0, pixels=c(512, 512), highlight = NULL, ...){
   
   if (!all(c('chr','pos','pvalue') %in% colnames(data))){
     stop('data must have columns "chr", "pos" and "pvalue"')
@@ -47,6 +48,15 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
     data$y <- data$pvalue
   }
   
+  if(!is.null(highlight)){
+    if(!is.character(highlight)){
+      if(!("highlight" %in% colnames(data))){
+        stop( "highlight should be charachter vector or a column in data with name 'highlight'")
+      }
+    }
+  }
+  
+  
   build=match.arg(build, choices = c('hg18','hg19','hg38'))
   speed=match.arg(speed, choices = c("slow", "fast", "ultrafast"))
   chrom_lengths=get_chrom_lengths(build)[extract_which_chr(data)]
@@ -67,6 +77,17 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   
   if(y_scale) plot <- plot + ggplot2::scale_y_continuous(expand=c(0.01,0),name=expression(-log[10](italic(p))))
   
+  
+    if(is.character(highlight)){
+      plot <- plot + ggplot2::geom_point(data = function(x) x[x$rsid %in% highlight, ], fill = "deeppink", shape = 21, show.legend = F)
+      
+      }
+     
+    if("highlight" %in% colnames(data)){
+      plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], aes(fill = highlight), shape = 21, show.legend = F) +
+        scale_fill_identity()
+      }
+
   return(
     plot + ggplot2::theme_classic()+
       ggplot2::scale_x_continuous(expand=c(0.01,0),breaks=x_breaks,
