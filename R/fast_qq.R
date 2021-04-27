@@ -7,7 +7,6 @@
 #' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 1.2
 #' @param linecolor Color of the abline of the theoretical and sample distributions.
 #' @param ci_color Color fof the confidence interval
-#' @param color2 Fill color for even-numbered chromosomes
 #' @param ci_alpha Alpha value (e.g. transparency) of the confidence's fill color
 #' @param conf.alpha Alpha level of the confidence interval. Default value = 0.05
 #' @param confint Print a confident interval. Default = TRUE

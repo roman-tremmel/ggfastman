@@ -40,8 +40,6 @@ fast_qq(
 \item{inflation_method}{Method to calculate the genomic inflation factor. choices = c("median","regression"). The "median" method is the most common way,while the regression method to estimate lambda is adapted from the GenABEL package.}
 
 \item{title}{A title added to the plot}
-
-\item{color2}{Fill color for even-numbered chromosomes}
 }
 \value{
 A ggplot2 object/plot
