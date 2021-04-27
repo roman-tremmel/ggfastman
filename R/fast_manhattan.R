@@ -72,7 +72,7 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   
   plot <- ggplot2::ggplot(data, ggplot2::aes(x=cumulative_pos,y=y,color=color,shape=shape))
   plot <- switch(speed,
-                 slow = plot + ggplot2::geom_point(alpha =alpha),
+                 slow = plot + ggplot2::geom_point(alpha = alpha),
                  fast  = plot + scattermore::geom_scattermore(pointsize=pointsize, pixels=pixels, alpha = alpha),
                  ultrafast = ggplot2::ggplot() + scattermore::geom_scattermost(data[, c("cumulative_pos", "y")])
   )
@@ -81,12 +81,12 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   
   
     if(is.character(highlight)){
-      plot <- plot + ggplot2::geom_point(data = function(x) x[x$rsid %in% highlight, ], fill = "deeppink", shape = 21, show.legend = F)
+      plot <- plot + ggplot2::geom_point(data = function(x) x[x$rsid %in% highlight, ], fill = "deeppink", color=1, shape = 21, show.legend = F)
       
       }
      
     if("highlight" %in% colnames(data)){
-      plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], ggplot2::aes(fill = highlight), shape = 21, show.legend = F) +
+      plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], ggplot2::aes(fill = highlight), color=1,shape = 21, show.legend = F) +
         ggplot2::scale_fill_identity()
       }
 
