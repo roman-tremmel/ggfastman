@@ -37,7 +37,7 @@ fast_qq(
 
 \item{log10}{Should the pvalues -log10 tranformed? Default = TRUE}
 
-\item{inflation_method}{Method to calculate the genomic inflation factor. choices = c("median","regression"). The "median" method is the most common way,while the regression method to estimate lambda is adapted from the GenABEL package.}
+\item{inflation_method}{Method to calculate the genomic inflation factor. choices = c("median","regression"). The "median" method is the most common way to estimate lambda. The regression method is adapted from the GenABEL package.}
 
 \item{title}{A title added to the plot}
 }

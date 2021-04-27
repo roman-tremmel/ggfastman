@@ -11,7 +11,7 @@
 #' @param conf.alpha Alpha level of the confidence interval. Default value = 0.05
 #' @param confint Print a confident interval. Default = TRUE
 #' @param log10 Should the pvalues -log10 tranformed? Default = TRUE
-#' @param inflation_method Method to calculate the genomic inflation factor. choices = c("median","regression"). The "median" method is the most common way,while the regression method to estimate lambda is adapted from the GenABEL package. 
+#' @param inflation_method Method to calculate the genomic inflation factor. choices = c("median","regression"). The "median" method is the most common way to estimate lambda. The regression method is adapted from the GenABEL package. 
 #' @param title A title added to the plot 
 #' @return A ggplot2 object/plot
 #' @export
