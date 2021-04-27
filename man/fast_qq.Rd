@@ -50,6 +50,6 @@ This is a very fast plotting function for quantile-quantile (QQ) plots using \co
 \examples{
 data("gwas_data")
 head(gwas_data)
-qq_fast(gwas_data$pvalue, inflation_method = "reg")
-qq_fast(gwas_data$pvalue, inflation_method = "med")
+fast_qq(gwas_data$pvalue, inflation_method = "reg")
+fast_qq(gwas_data$pvalue, inflation_method = "med")
 }

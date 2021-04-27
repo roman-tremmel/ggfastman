@@ -18,8 +18,8 @@
 #' @examples
 #' data("gwas_data")
 #' head(gwas_data)
-#' qq_fast(gwas_data$pvalue, inflation_method = "reg")
-#' qq_fast(gwas_data$pvalue, inflation_method = "med")
+#' fast_qq(gwas_data$pvalue, inflation_method = "reg")
+#' fast_qq(gwas_data$pvalue, inflation_method = "med")
 fast_qq <- function(pvalue,speed ="fast",pointsize = 1.2,linecolor="deeppink",ci_color="steelblue",ci_alpha = 0.3,conf.alpha=.05,
                     confint=T,log10=T,inflation_method="median",title="QQ-plot"){
   speed=match.arg(speed,choices = c("slow", "fast", "ultrafast"))
