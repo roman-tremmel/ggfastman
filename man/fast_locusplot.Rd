@@ -2,16 +2,18 @@
 % Please edit documentation in R/fast_locusplot.R
 \name{fast_locusplot}
 \alias{fast_locusplot}
-\title{Function to generate zoomed locus plots including LD}
+\title{Function to generate zoomed locus plots including linkage diequilibrium using r2}
 \usage{
-fast_locusplot(data, build = "hg19", snp = "top", token = NULL)
+fast_locusplot(data, build = "hg19", snp = "top", pop = "CEU", token = NULL)
 }
 \arguments{
-\item{data}{A data.frame. Columns 'chr', 'pos', and 'pvalue' are required}
+\item{data}{A data.frame. Columns 'chr', 'pos','pvalue' and 'rsid' are required}
 
 \item{build}{Genomic build. Currently only hg19 is supported.}
 
-\item{snp}{Default top snp with lowest pvalue or rsid}
+\item{snp}{Default: top snp with lowest pvalue. Otherwise specify any rsid id.}
+
+\item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU"}
 
 \item{token}{!!!REQUIRED!!!: Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess}
 }
@@ -19,7 +21,7 @@ fast_locusplot(data, build = "hg19", snp = "top", token = NULL)
 A ggplot2 object/plot
 }
 \description{
-Function to generate zoomed locus plots including LD
+Function to generate zoomed locus plots including linkage diequilibrium using r2
 }
 \examples{
 fast_locusplot(gwas_data, token = "mytoken")
