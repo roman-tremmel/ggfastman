@@ -9,6 +9,7 @@ License: What license is it under?
 URL:
 BugReports: to me
 Depends: R (>= 3.5.0)
-Imports: ggplot2 (>= 2.2.1), scattermore
+biocViews:
+Imports: ggplot2 (>= 2.2.1), scattermore, ggbio
 Encoding: UTF-8
 RoxygenNote: 7.1.1.9000
