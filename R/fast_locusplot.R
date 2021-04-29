@@ -55,7 +55,7 @@ fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",token=NULL){
   p1 <- ggplot2::ggplot(dd,ggplot2::aes(x=pos,y=-log10(pvalue),color=R2, shape = ifelse(rsid == snp, 17,16))) + 
         ggplot2::geom_segment(x = gwas_data_topsnp$pos,xend = gwas_data_topsnp$pos,y=-Inf, yend = -log10(gwas_data_topsnp$pvalue),linetype = 2, color = 1) +
         ggplot2::geom_point(size=3) +
-        ggrepel::geom_label_repel(data = dd[dd$rsid ==snp,], ggplot2::aes(label = rsid))+
+        ggrepel::geom_label_repel(data = dd[dd$rsid ==snp,],color = 1, ggplot2::aes(label = rsid))+
         ggplot2::scale_color_viridis_c(direction = -1) +
         ggplot2::scale_shape_identity(guide = "none")  +
         ggplot2::scale_y_continuous(name=expression(-log[10](italic(p)))) +
