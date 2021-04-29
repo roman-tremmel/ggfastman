@@ -7,7 +7,6 @@
 #' @return A ggplot2 object/plot
 #' @importFrom LDlinkR LDproxy
 #' @importFrom Homo.sapiens Homo.sapiens
-#' @importFrom biovizBase genesymbol
 #' @importFrom ggbio tracks 
 #' @importFrom ggbio geom_alignment 
 #' @importFrom ggrepel geom_label_repel 
