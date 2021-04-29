@@ -10,6 +10,6 @@ URL:
 BugReports: to me
 Depends: R (>= 3.5.0)
 biocViews:
-Imports: ggplot2 (>= 2.2.1), scattermore, ggbio
+Imports: ggplot2 (>= 2.2.1), scattermore, ggbio, Homo.sapiens, LDlinkR, ggrepel, GenomicRanges
 Encoding: UTF-8
 RoxygenNote: 7.1.1.9000
