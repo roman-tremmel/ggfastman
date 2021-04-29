@@ -1,8 +1,9 @@
-#' Function to generate zoomed locus plots including LD 
+#' Function to generate zoomed locus plots including linkage diequilibrium using r2 
 #'
-#' @param data A data.frame. Columns 'chr', 'pos', and 'pvalue' are required
+#' @param data A data.frame. Columns 'chr', 'pos','pvalue' and 'rsid' are required
 #' @param build Genomic build. Currently only hg19 is supported.
-#' @param snp Default top snp with lowest pvalue or rsid
+#' @param snp Default: top snp with lowest pvalue. Otherwise specify any rsid id.
+#' @param pop a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU"
 #' @param token !!!REQUIRED!!!: Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess
 #' @return A ggplot2 object/plot
 #' @importFrom LDlinkR LDproxy
@@ -16,12 +17,31 @@
 #' @export
 #' @examples
 #' fast_locusplot(gwas_data, token = "mytoken")
-fast_locusplot=function(data, build="hg19",snp="top",token=NULL){
+fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",token=NULL){
+  gwas_data <- data
   if (is.null(token)){
     stop('Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess')
   }
+  if (!all(c('chr','pos','pvalue','rsid') %in% colnames(data))){
+    stop('data must have columns "chr", "pos" and "pvalue" as well as "rsid"')
+  }
+  if(is.numeric(data$chr)){
+    print("Numeric 'chr' column detected. Tried to transform to character by prefixing 'chr'.")
+    data$chr <- paste0("chr", data$chr)
+  }
+  
+  if (!is.numeric(data$pos)) 
+    stop("pos column should be numeric.")
+  
+  if (!is.numeric(data$pvalue)) 
+    stop("pvalue column should be numeric.")
+  
   # get first top SNP
-  if(snp  == "top"){ snp <- head(gwas_data[which.min(gwas_data$pvalue),]$rsid, 1)}
+  if(snp  == "top"){ snp <- head(data[which.min(gwas_data$pvalue),]$rsid, 1)}
+  if(!any(snp == gwas_data$rsid)){
+    stop("specified rsid is not detected in data!")
+  }
+  
   # LINKAGE -----------------------------------------------------------------
   df_proxies <- LDlinkR::LDproxy(snp,pop="CEU",r2d="r2", token = token)
   # claculate genomic range
