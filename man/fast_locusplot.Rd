@@ -9,6 +9,9 @@ fast_locusplot(
   build = "hg19",
   snp = "top",
   pop = "CEU",
+  show_MAF = FALSE,
+  show_regulom = FALSE,
+  RDB_ranks = c("1", "2"),
   color = "viridis",
   token = NULL
 )
@@ -21,6 +24,12 @@ fast_locusplot(
 \item{snp}{Default: top snp with lowest pvalue is taken. Otherwise specify any rsid id included in data.}
 
 \item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU".}
+
+\item{show_MAF}{Show minor allele frequencies (MAF) using different sizes of points. Default=FALSE.}
+
+\item{show_regulom}{Show most significant RegulomeDB ranks. More information at https://regulomedb.org/regulome-help/. Default=FALSE.}
+
+\item{RDB_ranks}{Specify ranks to show. Default= 1 and 2 including subtypes a-f.}
 
 \item{color}{color scheme for R^2 values. Possible values are c("viridis","magma","inferno","plasma").}
 
