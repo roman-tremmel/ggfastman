@@ -4,6 +4,9 @@
 #' @param build Genomic build. Currently only hg19 is supported.
 #' @param snp Default: top snp with lowest pvalue is taken. Otherwise specify any rsid id included in data.
 #' @param pop a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU".
+#' @param show_MAF Show minor allele frequencies from specified 1000 Genomes population. Default = FALSE.
+#' @param show_regulom Show RegulomeDB ranks. More information at https://regulomedb.org/regulome-help. Default = FALSE.
+#' @param RDB_ranks Specify RegulomeDB ranks to show. Defaults are the most significants: 1 and 2 including subtypes a-f.
 #' @param color color scheme for R^2 values. Possible values are c("viridis","magma","inferno","plasma").
 #' @param token !!!REQUIRED!!!: Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess
 #' @return A ggplot2 object/plot

@@ -11,7 +11,7 @@ fast_locusplot(
   pop = "CEU",
   show_MAF = FALSE,
   show_regulom = FALSE,
-  RDB_ranks = c("1", "2"),
+  RDB_ranks = c(1, 2),
   color = "viridis",
   token = NULL
 )
@@ -25,11 +25,11 @@ fast_locusplot(
 
 \item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU".}
 
-\item{show_MAF}{Show minor allele frequencies (MAF) using different sizes of points. Default=FALSE.}
+\item{show_MAF}{Show minor allele frequencies from specified 1000 Genomes population. Default = FALSE.}
 
-\item{show_regulom}{Show most significant RegulomeDB ranks. More information at https://regulomedb.org/regulome-help/. Default=FALSE.}
+\item{show_regulom}{Show RegulomeDB ranks. More information at https://regulomedb.org/regulome-help. Default = FALSE.}
 
-\item{RDB_ranks}{Specify ranks to show. Default= 1 and 2 including subtypes a-f.}
+\item{RDB_ranks}{Specify RegulomeDB ranks to show. Defaults are the most significants: 1 and 2 including subtypes a-f.}
 
 \item{color}{color scheme for R^2 values. Possible values are c("viridis","magma","inferno","plasma").}
 
