@@ -15,6 +15,7 @@ fast_manhattan(
   speed = "fast",
   pointsize = 0,
   pixels = c(512, 512),
+  dodge_x = FALSE,
   highlight = NULL,
   ...
 )
@@ -37,6 +38,8 @@ fast_manhattan(
 \item{pointsize}{Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.}
 
 \item{pixels}{Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512).}
+
+\item{dodge_x}{default FALSE. When turned on all chromosome labels are drawn and every second are moved a little bit to the bottom.}
 
 \item{highlight}{Character vector with matching entries of 'data$rsid' or column 'highlight' in data with NAs or concrete colors e.g. 'deeppink'.}
 }

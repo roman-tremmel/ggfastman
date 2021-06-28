@@ -4,16 +4,25 @@
 \alias{fast_locusplot}
 \title{Function to generate zoomed locus plots including linkage diequilibrium using r2}
 \usage{
-fast_locusplot(data, build = "hg19", snp = "top", pop = "CEU", token = NULL)
+fast_locusplot(
+  data,
+  build = "hg19",
+  snp = "top",
+  pop = "CEU",
+  color = "viridis",
+  token = NULL
+)
 }
 \arguments{
 \item{data}{A data.frame. Columns 'chr', 'pos','pvalue' and 'rsid' are required}
 
 \item{build}{Genomic build. Currently only hg19 is supported.}
 
-\item{snp}{Default: top snp with lowest pvalue. Otherwise specify any rsid id.}
+\item{snp}{Default: top snp with lowest pvalue is taken. Otherwise specify any rsid id included in data.}
 
-\item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU"}
+\item{pop}{a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU".}
+
+\item{color}{color scheme for R^2 values. Possible values are c("viridis","magma","inferno","plasma").}
 
 \item{token}{!!!REQUIRED!!!: Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess}
 }
