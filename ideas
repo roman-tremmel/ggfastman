@@ -1,0 +1,4 @@
+Ideas to include
+
+1. Locusplot
+2. add `guides(x = guide_axis(n.dodge = 2))` to dodge every second chr lable a bit.   
