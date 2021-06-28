@@ -1,7 +1,7 @@
 Package: ggfastman
 Type: Package
 Title: ggfastman: ggplot2-based manhattenplots in fast and ultrafast
-Version: 0.1
+Version: 1.2
 Author: Roman Tremmel
 Maintainer: Roman Tremmel <roman.tremmel@gmail.com>
 Description: A function to generate manhattenplots for GWAS data in a very fast way. This package is based on ideas from here and here.
