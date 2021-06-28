@@ -2,8 +2,9 @@
 #'
 #' @param data A data.frame. Columns 'chr', 'pos','pvalue' and 'rsid' are required
 #' @param build Genomic build. Currently only hg19 is supported.
-#' @param snp Default: top snp with lowest pvalue. Otherwise specify any rsid id.
-#' @param pop a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU"
+#' @param snp Default: top snp with lowest pvalue is taken. Otherwise specify any rsid id included in data.
+#' @param pop a 1000 Genomes Project population, (e.g. YRI or CEU), multiple allowed, default = "CEU".
+#' @param color color scheme for R^2 values. Possible values are c("viridis","magma","inferno","plasma").
 #' @param token !!!REQUIRED!!!: Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess
 #' @return A ggplot2 object/plot
 #' @importFrom LDlinkR LDproxy
@@ -17,7 +18,7 @@
 #' @export
 #' @examples
 #' fast_locusplot(gwas_data, token = "mytoken")
-fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",token=NULL){
+fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",color="viridis",token=NULL){
   gwas_data <- data
   if (is.null(token)){
     stop('Register for token at https://ldlink.nci.nih.gov/?tab=apiaccess')
@@ -50,13 +51,13 @@ fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",token=NULL){
   gwas_data_topsnp$pos_max <- gwas_data_topsnp$pos +50000
   # and update SNP data
   dd <- gwas_data[gwas_data$chr == gwas_data_topsnp$chr & gwas_data$pos >= gwas_data_topsnp$pos_min & gwas_data$pos <= gwas_data_topsnp$pos_max,]
-  dd <- base::merge(dd, df_proxies, by.x = "rsid", by.y = "RS_Number")
+  dd <- base::merge(dd, df_proxies, all.x = T, by.x = "rsid", by.y = "RS_Number")
   
-  p1 <- ggplot2::ggplot(dd,ggplot2::aes(x=pos,y=-log10(pvalue),color=R2, shape = ifelse(rsid == snp, 17,16))) + 
+  p1 <- ggplot2::ggplot(dd,ggplot2::aes(x=pos,y=-log10(pvalue), color=R2, shape = ifelse(rsid == snp, 17,16))) + 
         ggplot2::geom_segment(x = gwas_data_topsnp$pos,xend = gwas_data_topsnp$pos,y=-Inf, yend = -log10(gwas_data_topsnp$pvalue),linetype = 2, color = 1) +
         ggplot2::geom_point(size=3) +
-        ggrepel::geom_label_repel(data = dd[dd$rsid ==snp,],color = 1, ggplot2::aes(label = rsid))+
-        ggplot2::scale_color_viridis_c(direction = -1) +
+        ggrepel::geom_label_repel(data = dd[dd$rsid ==snp,], color = 1, ggplot2::aes(label = rsid), min.segment.length = unit(2,"mm"))+
+        ggplot2::scale_color_viridis_c(direction = -1,breaks=seq(0,1,.2), na.value = "grey",option = color) +
         ggplot2::scale_shape_identity(guide = "none")  +
         ggplot2::scale_y_continuous(name=expression(-log[10](italic(p)))) +
         ggplot2::theme_classic(base_size = 14) +
@@ -70,6 +71,5 @@ fast_locusplot=function(data, build="hg19",snp="top",pop="CEU",token=NULL){
     ggplot2::geom_vline(xintercept = gwas_data_topsnp$pos,linetype = 2) + 
     ggplot2::theme_classic(base_size = 14)
   # PLOT --------------------------------------------------------------------
-  
-   ggbio::tracks(p1, p2,heights = c(0.7,0.3),xlim = c(gwas_data_topsnp$pos_min, gwas_data_topsnp$pos_max))
+   ggbio::tracks(p1, p2, heights = c(0.7,0.3), xlim = c(gwas_data_topsnp$pos_min, gwas_data_topsnp$pos_max))
 }

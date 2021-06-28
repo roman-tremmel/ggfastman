@@ -11,6 +11,7 @@
 #' @param speed The speed option. Fast and ultrafast use \code{\link{scattermore}} functionality
 #' @param pointsize Only when using the 'fast' option you can increase pointsize. Default is 0. When using small pointsizes it could be that points are not shown in the RStudio Plots or Zoom window. But they will plotted when saving to pdf.
 #' @param pixels Only when using the 'fast' option you can increase pixel width and height. Default is c(512, 512). 
+#' @param dodge_x default FALSE. When turned on all chromosome labels are drawn and every second are moved a little bit to the bottom. 
 #' @param highlight Character vector with matching entries of 'data$rsid' or column 'highlight' in data with NAs or concrete colors e.g. 'deeppink'. 
 #' @return A ggplot2 object/plot
 #' @export
@@ -26,7 +27,7 @@
 #' # highlight most significant snps
 #' fast_manhattan(gwas_data, build='hg18', speed = "fast", highlight = gwas_data[gwas_data$pvalue < 10e-20,]$rsid)
 fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale = TRUE,log10p=TRUE,alpha = 1,
-                   speed = "fast",pointsize=0, pixels=c(512, 512), highlight = NULL, ...){
+                   speed = "fast",pointsize=0,pixels=c(512, 512),dodge_x=FALSE, highlight = NULL, ...){
   
   if (!all(c('chr','pos','pvalue') %in% colnames(data))){
     stop('data must have columns "chr", "pos" and "pvalue"')
@@ -70,6 +71,11 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
   color_map=unique(data$color)
   names(color_map)=unique(data$color)
   
+  
+  
+  
+  
+  
   plot <- ggplot2::ggplot(data, ggplot2::aes(x=cumulative_pos,y=y,color=color,shape=shape))
   plot <- switch(speed,
                  slow = plot + ggplot2::geom_point(alpha = alpha),
@@ -88,7 +94,19 @@ fast_manhattan=function(data,build="hg19",color1='black',color2='grey',y_scale =
     if("highlight" %in% colnames(data)){
       plot <- plot + ggplot2::geom_point(data = function(x) x[!is.na(x$highlight),], ggplot2::aes(fill = highlight), color=1,shape = 21, show.legend = F) +
         ggplot2::scale_fill_identity()
-      }
+    }
+  
+  if(dodge_x){
+    if(length(chrom_lengths) == 21){
+      names(x_breaks)[20]="20"
+    }
+    if(length(chrom_lengths) > 21){
+      names(x_breaks)[20]='20'
+      names(x_breaks)[22]='22'
+    }
+    plot <- plot + ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 2))
+  }
+  
 
   return(
     plot + ggplot2::theme_classic()+
