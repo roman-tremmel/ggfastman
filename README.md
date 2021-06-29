@@ -171,10 +171,10 @@ fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize = 3.2, pixels
 
 ![Resulting manhattan plot](plot/zoom.png)
 
-- and locus plots with linkage data. Of note, you have to register [here](https://ldlink.nci.nih.gov/?tab=apiaccess) and get a token
+- and locus plots with linkage data. Of note, you have to register [here](https://ldlink.nci.nih.gov/?tab=apiaccess) and get your token
 
 ```{r} 
-fast_locusplot(gwas_data, token = "ec9d99bca22f", show_MAF = T, show_regulom = T)
+fast_locusplot(gwas_data, token = "replace with your token", show_MAF = T, show_regulom = T)
 ```
 
 ![locus plot](plot/locus.png)
