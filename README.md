@@ -171,6 +171,14 @@ fast_manhattan(gwas_data, build = "hg18", speed = "fast",pointsize = 3.2, pixels
 
 ![Resulting manhattan plot](plot/zoom.png)
 
+- and locus plots with linkage data. Of note, you have to register [here](https://ldlink.nci.nih.gov/?tab=apiaccess) and get a token
+
+```{r} 
+fast_locusplot(gwas_data, token = "ec9d99bca22f", show_MAF = T, show_regulom = T)
+```
+
+![locus plot](plot/locus.png)
+
 In addition the package includes also a fast way to create QQ-plots
 
 ```{r}
