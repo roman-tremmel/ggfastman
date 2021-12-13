@@ -16,7 +16,7 @@ So far the package is tested on Windows and MacOS, but is not on Cran, thus you 
 
     devtools::install_github("roman-tremmel/ggfastman", upgrade = "never")
  
-The package is depending on the additional packages `ggplot2` and `scattermore` and some more. If there are problems try ti install at least the latter one using:
+The package is depending on the additional packages `ggplot2` and `scattermore` and some more. If there are problems try to install at least the latter one using:
 
     devtools::install_github('exaexa/scattermore', dependencies = F, force = T, upgrade = "never")
     
