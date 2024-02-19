@@ -19,6 +19,12 @@ So far the package is tested on Windows and MacOS, but is not on Cran, thus you 
 The package is depending on the additional packages `ggplot2` and `scattermore` and some more. If there are problems try to install at least the latter one using:
 
     devtools::install_github('exaexa/scattermore', dependencies = F, force = T, upgrade = "never")
+
+# Citation
+
+You can cite the package using
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10656742.svg)](https://doi.org/10.5281/zenodo.10656742)
     
 # Usage
 
