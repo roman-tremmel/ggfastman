@@ -5,7 +5,7 @@
   
 ## Introduction
 
-This is a fast and easily customizable plotting function for GWAS results (e.g., p-values). As it builds on `ggplot2`, the approach was inspired by a previous [project](https://github.com/boxiangliu/manhattan) and combined with the high-performance rendering strategy of [scattermore project](https://github.com/exaexa/scattermore).
+This is a fast and easily customizable plotting function for GWAS results (e.g., p-values). As it builds on `ggplot2`, the approach was inspired by a previous [project](https://github.com/boxiangliu/manhattan) and combined with the high-performance rendering strategy of [scattermore ](https://github.com/exaexa/scattermore) project.
 
 A Manhattan plot displays chromosomal positions against - typically log10-transformed values - from genome-wide association study analyses (GWAS) between single nucleotide variants (SNVs) (also known as polymorphisms (SNPs)) and an endpoint such as gene expression, enzyme activity, or case–control status.
 
