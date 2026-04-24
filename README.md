@@ -7,7 +7,7 @@
 
 This is a fast and easily customizable plotting function for GWAS results (e.g., p-values). As it builds on `ggplot2`, the approach was inspired by a previous [project](https://github.com/boxiangliu/manhattan) and combined with the high-performance rendering strategy of the [scattermore ](https://github.com/exaexa/scattermore) R package.
 
-A Manhattan plot displays chromosomal positions against - typically log10-transformed values - from genome-wide association study analyses (GWAS) between single nucleotide variants (SNVs) (historically also known as polymorphisms, i.e., SNPs) and an endpoint such as gene expression, enzyme activity, or case–control status.
+A Manhattan plot displays chromosomal positions against - typically log10-transformed values - from genome-wide association study analyses (GWAS) between single nucleotide variants (SNVs) (historically also known as polymorphisms, i.e., SNPs) and an endpoint such as continuous traits like gene expression or enzyme activity, or binary traits such as case–control status.
 
 One of the first and most known R packages providing both Manhattan and QQ plots was [`qqman`](https://github.com/stephenturner/qqman) by [Stephen Turner](https://twitter.com/strnr). Since then, many alternative tools and approaches have been developed in both R and Python. However, a solution that remains performant even when visualizing billions of data points has been lacking.
 
