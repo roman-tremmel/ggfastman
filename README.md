@@ -1,8 +1,8 @@
 # ggfastman <a href="https://github.com/roman-tremmel/ggfastman"><img src="man/logo.png" align="right" height="138" /></a>
 
-
-
-
+  
+  
+  
 ## Introduction
 
 This is a fast and easily customizable plotting function for GWAS results (e.g., p-values). As it builds on `ggplot2`, the approach was inspired by a previous [project](https://github.com/boxiangliu/manhattan) and combined with the high-performance rendering strategy of [scattermore project](https://github.com/exaexa/scattermore).
