@@ -1,4 +1,4 @@
-# ggfastman <a href="https://github.com/roman-tremmel/ggfastman"><img src="man/logo.png" align="right" height="138" /></a>
+# ggfastman <a href="https://github.com/roman-tremmel/ggfastman"><img src="plot/logo.png" align="right" height="138" /></a>
 <br>
 <br>
   
