@@ -1,4 +1,6 @@
-# Introduction
+# ggfastman <a href="https://github.com/roman-tremmel/ggfastman"><img src="man/logo.png" align="right" height="138" /></a>
+
+## Introduction
 
 This is a fast and easily customizable plotting function for GWAS results (e.g., p-values). As it builds on `ggplot2`, the approach was inspired by a previous [project](https://github.com/boxiangliu/manhattan) and combined with the high-performance rendering strategy of [scattermore project](https://github.com/exaexa/scattermore).
 
@@ -8,7 +10,7 @@ One of the first and most known R packages providing both Manhattan and QQ plots
 
 This package `ggfastman` aims to fill this gap.
 
-# Installation
+## Installation
 
 So far, the package has been tested on Windows and macOS, but it is not yet available on CRAN. Therefore, you need to install it via GitHub:
 
@@ -18,15 +20,15 @@ The package is depending on the additional packages `ggplot2` and `scattermore` 
 
     devtools::install_github('exaexa/scattermore', dependencies = F, force = T, upgrade = "never")
 
-# Citation
+## Citation
 
 You can cite the package using
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10656742.svg)](https://doi.org/10.5281/zenodo.10656742)
     
-# Usage
+## Usage
 
-## The normal speed option
+### The normal speed option
 
 As an example, you can load sample data included in the package and run the following code. More information about the dataset is available [here](https://github.com/boxiangliu/manhattan).
 
@@ -50,7 +52,7 @@ We can generate the Manhattan plot using the "slow" speed option, which relies s
 fast_manhattan(gwas_data, build='hg18', speed = "slow")
 ```
 
-## The fast way
+### The fast way
 
 Depending on your system, this can take some time, particularly when plotting p-values for more than 1,000,000 SNVs. Therefore, `geom_point()` is replaced with `scattermore::geom_scattermore()` function by using the "fast" option in the Manhattan plotting function.
 
@@ -68,7 +70,7 @@ Of course, you can increase the point size and the resolution, but this comes at
 fast_manhattan(gwas_data, build='hg18', speed = "fast", pointsize = 3, pixels = c(1000, 1000))
 ```
 
-## The insane way
+### The insane way
 
 The fastest option is `speed = "ultrafast"`. This mode achieves maximum performance by plotting the data in pure black only. However, this trade-off is often worthwhile for extremely large datasets. Benchmark results are provided [below](https://github.com/roman-tremmel/ggfastman#benchmarks).
 
@@ -189,7 +191,7 @@ fast_qq(pvalue = runif(10^6), speed = "fast")
 
 ![Resulting manhattan plot](plot/qqplot.png)
 
-# Benchmarks
+## Benchmarks
 
 The benchmark analysis includes all operations involved in plot generation, including code evaluation, plotting, and saving a .png file using `png()` for base R plots and `ggsave()` for ggplot figures. For comparability, identical parameters were used across both approaches (e.g.,  `width = 270`, `height = 100`, `units = "mm"` as well as `res=300` and `dpi = 300`, respectively).
 
